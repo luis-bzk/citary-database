@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database Service
+  postgres:
+    image: postgres:latest
+    container_name: postgres_db
+    ports:
+      - '4000:5432'
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: my_database_pg
+    volumes:
+      - ./core.sql:/docker-entrypoint-initdb.d/1_core.sql
+      - ./data.sql:/docker-entrypoint-initdb.d/2_data.sql
+      - ./init.sql:/docker-entrypoint-initdb.d/3_init.sql
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
