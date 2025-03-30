@@ -81,43 +81,43 @@ create table
   );
 
 create table
-  data.data_doctor (
-    doc_id serial primary key,
-    doc_license_number varchar(20) not null,
-    doc_years_experience int not null,
-    doc_email varchar(100),
-    doc_created_date timestamp default current_timestamp,
-    doc_record_status varchar(1) not null,
+  data.data_appointment_manager (
+    ama_id serial primary key,
+    ama_license_number varchar(20) not null,
+    ama_years_experience int not null,
+    ama_email varchar(100),
+    ama_created_date timestamp default current_timestamp,
+    ama_record_status varchar(1) not null,
     id_person int not null,
-    constraint fk1_data_doctor foreign key (id_person) references data.data_person (per_id)
+    constraint fk1_data_appointment_manager foreign key (id_person) references data.data_person (per_id)
   );
 
 create table
-  data.data_doctor_service (
+  data.data_appointment_manager_service (
     dse_id serial primary key,
     dse_created_date timestamp default current_timestamp,
     dse_record_status varchar(1) not null,
-    id_doctor int not null,
+    id_appointment_manager int not null,
     id_service int not null,
-    constraint fk1_data_doctor_service foreign key (id_doctor) references data.data_doctor (doc_id),
-    constraint fk2_data_doctor_service foreign key (id_service) references data.data_service (ser_id)
+    constraint fk1_data_appointment_manager_service foreign key (id_appointment_manager) references data.data_appointment_manager (ama_id),
+    constraint fk2_data_appointment_manager_service foreign key (id_service) references data.data_service (ser_id)
   );
 
 create table
-  data.data_patient (
-    pat_id serial primary key,
-    pat_medical_record_number varchar(20) not null,
-    pat_insurance_company varchar(100),
-    pat_insurance_number varchar(20),
-    pat_blood_type varchar(3),
-    pat_allergies varchar(200),
-    pat_medical_conditions varchar(200),
-    pat_height numeric(2, 4),
-    pat_weight numeric(4, 4),
-    pat_created_date timestamp default current_timestamp,
-    pat_record_status varchar(1) not null,
+  data.data_client (
+    cli_id serial primary key,
+    cli_medical_record_number varchar(20) not null,
+    cli_insurance_company varchar(100),
+    cli_insurance_number varchar(20),
+    cli_blood_type varchar(3),
+    cli_allergies varchar(200),
+    cli_medical_conditions varchar(200),
+    cli_height numeric(2, 4),
+    cli_weight numeric(4, 4),
+    cli_created_date timestamp default current_timestamp,
+    cli_record_status varchar(1) not null,
     id_person int not null,
-    constraint fk1_data_patient foreign key (id_person) references data.data_person (per_id)
+    constraint fk1_data_client foreign key (id_person) references data.data_person (per_id)
   );
 
 create table
@@ -129,9 +129,9 @@ create table
     mhi_created_date timestamp default current_timestamp,
     mhi_record_status varchar(1) not null,
     id_status int not null,
-    id_patient int not null,
+    id_client int not null,
     constraint fk1_data_medical_history foreign key (id_status) references core.core_status (sta_id),
-    constraint fk2_data_medical_history foreign key (id_patient) references data.data_patient (pat_id)
+    constraint fk2_data_medical_history foreign key (id_client) references data.data_client (cli_id)
   );
 
 create table
@@ -143,10 +143,10 @@ create table
     pre_prescription_date timestamp default current_timestamp,
     pre_created_date timestamp default current_timestamp,
     pre_record_status varchar(1) not null,
-    id_doctor int not null,
-    id_patient int not null,
-    constraint fk1_data_prescription foreign key (id_doctor) references data.data_doctor (doc_id),
-    constraint fk2_data_prescription foreign key (id_patient) references data.data_patient (pat_id)
+    id_appointment_manager int not null,
+    id_client int not null,
+    constraint fk1_data_prescription foreign key (id_appointment_manager) references data.data_appointment_manager (ama_id),
+    constraint fk2_data_prescription foreign key (id_client) references data.data_client (cli_id)
   );
 
 create table
@@ -161,9 +161,9 @@ create table
     con_final_price numeric(10, 4) not null,
     con_created_date timestamp default current_timestamp,
     con_record_status varchar(1) not null,
-    id_doctor int not null,
+    id_appointment_manager int not null,
     id_service int not null,
-    constraint fk1_data_consultation foreign key (id_doctor) references data.data_doctor (doc_id),
+    constraint fk1_data_consultation foreign key (id_appointment_manager) references data.data_appointment_manager (ama_id),
     constraint fk2_data_consultation foreign key (id_service) references data.data_service (ser_id)
   );
 
@@ -177,9 +177,9 @@ create table
     sch_end_break_time time,
     sch_created_date timestamp default current_timestamp,
     sch_record_status varchar(1) not null,
-    id_doctor int not null,
+    id_appointment_manager int not null,
     id_address int not null,
-    constraint fk1_data_schedule foreign key (id_doctor) references data.data_doctor (doc_id),
+    constraint fk1_data_schedule foreign key (id_appointment_manager) references data.data_appointment_manager (ama_id),
     constraint fk2_data_schedule foreign key (id_address) references data.data_address (add_id)
   );
 
@@ -192,13 +192,13 @@ create table
     app_end_time time not null,
     app_created_date timestamp default current_timestamp,
     app_record_status varchar(1) not null,
-    id_doctor int not null,
-    id_patient int not null,
+    id_appointment_manager int not null,
+    id_client int not null,
     id_consultation int not null,
     id_address int not null,
     id_status int not null,
-    constraint fk1_data_appointment foreign key (id_doctor) references data.data_doctor (doc_id),
-    constraint fk2_data_appointment foreign key (id_patient) references data.data_patient (pat_id),
+    constraint fk1_data_appointment foreign key (id_appointment_manager) references data.data_appointment_manager (ama_id),
+    constraint fk2_data_appointment foreign key (id_client) references data.data_client (cli_id),
     constraint fk3_data_appointment foreign key (id_consultation) references data.data_consultation (con_id),
     constraint fk4_data_appointment foreign key (id_address) references data.data_address (add_id),
     constraint fk5_data_appointment foreign key (id_status) references core.core_status (sta_id)
@@ -212,12 +212,12 @@ create table
     rev_comment varchar(400) not null,
     rev_created_date timestamp default current_timestamp,
     rev_record_status varchar(1) not null,
-    id_doctor int not null,
-    id_patient int not null,
+    id_appointment_manager int not null,
+    id_client int not null,
     id_consultation int not null,
     id_appointment int not null,
-    constraint fk1_data_review foreign key (id_doctor) references data.data_doctor (doc_id),
-    constraint fk2_data_review foreign key (id_patient) references data.data_patient (pat_id),
+    constraint fk1_data_review foreign key (id_appointment_manager) references data.data_appointment_manager (ama_id),
+    constraint fk2_data_review foreign key (id_client) references data.data_client (cli_id),
     constraint fk3_data_review foreign key (id_consultation) references data.data_consultation (con_id),
     constraint fk4_data_review foreign key (id_appointment) references data.data_appointment (app_id)
   );
