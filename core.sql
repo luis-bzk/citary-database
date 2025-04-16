@@ -39,12 +39,13 @@ create table
   core.core_user (
     use_id serial primary key,
     use_name varchar(100) not null,
-    use_last_name varchar(100) not null,
+    use_last_name varchar(100),
     use_email varchar(100) unique not null,
     use_password varchar(100) not null,
     use_token varchar(60),
     use_created_date timestamp default current_timestamp,
-    use_record_status varchar(1) not null
+    use_record_status varchar(1) not null,
+    use_google_id varchar(100)
   );
 
 create table
@@ -114,6 +115,18 @@ create table
     nty_description varchar(300) not null,
     nty_created_date timestamp default current_timestamp,
     nty_record_status varchar(1) not null
+  );
+
+create table
+  core.core_sessions (
+    ses_id serial primary key,
+    ses_jwt varchar(200) not null,
+    id_user int not null,
+    ses_created_date timestamp default current_timestamp,
+    ses_expires_at TIMESTAMP,
+    ses_ip varchar(200),
+    ses_user_agent varchar(255),
+    constraint fk1_core_sessions foreign key (id_user) references core.core_user (use_id)
   );
 
 -- TODO
