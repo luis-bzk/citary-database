@@ -38,8 +38,8 @@ create table
 create table
   core.core_user (
     use_id serial primary key,
-    use_name varchar(100) not null,
-    use_last_name varchar(100),
+    use_name varchar(50) not null,
+    use_last_name varchar(50),
     use_email varchar(100) unique not null,
     use_password varchar(100) not null,
     use_token varchar(60),
@@ -51,7 +51,7 @@ create table
 create table
   core.core_role (
     rol_id serial primary key,
-    rol_name varchar(100) not null,
+    rol_name varchar(50) not null,
     rol_description varchar(200),
     rol_created_date timestamp default current_timestamp,
     rol_record_status varchar(1) not null
