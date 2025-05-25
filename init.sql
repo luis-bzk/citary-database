@@ -1,32 +1,32 @@
 -- latin countries
-INSERT INTO
+insert into
     core.core_country (cou_name, cou_code, cou_prefix, cou_record_status)
-VALUES
-    ('Argentina', '+54', 'AR', '0'),
-    ('Bolivia', '+591', 'BO', '0'),
-    ('Brazil', '+55', 'BR', '0'),
-    ('Chile', '+56', 'CL', '0'),
-    ('Colombia', '+57', 'CO', '0'),
-    ('Costa Rica', '+506', 'CR', '0'),
-    ('Cuba', '+53', 'CU', '0'),
-    ('Dominican Republic', '+1-809', 'DO', '0'),
-    ('Ecuador', '+593', 'EC', '0'),
-    ('El Salvador', '+503', 'SV', '0'),
-    ('Guatemala', '+502', 'GT', '0'),
-    ('Honduras', '+504', 'HN', '0'),
-    ('Mexico', '+52', 'MX', '0'),
-    ('Nicaragua', '+505', 'NI', '0'),
-    ('Panama', '+507', 'PA', '0'),
-    ('Paraguay', '+595', 'PY', '0'),
-    ('Peru', '+51', 'PE', '0'),
-    ('Puerto Rico', '+1-787', 'PR', '0'),
-    ('Uruguay', '+598', 'UY', '0'),
-    ('Venezuela', '+58', 'VE', '0');
+values
+    ('argentina', '+54', 'ar', '0'),
+    ('bolivia', '+591', 'bo', '0'),
+    ('brazil', '+55', 'br', '0'),
+    ('chile', '+56', 'cl', '0'),
+    ('colombia', '+57', 'co', '0'),
+    ('costa rica', '+506', 'cr', '0'),
+    ('cuba', '+53', 'cu', '0'),
+    ('dominican republic', '+1-809', 'do', '0'),
+    ('ecuador', '+593', 'ec', '0'),
+    ('el salvador', '+503', 'sv', '0'),
+    ('guatemala', '+502', 'gt', '0'),
+    ('honduras', '+504', 'hn', '0'),
+    ('mexico', '+52', 'mx', '0'),
+    ('nicaragua', '+505', 'ni', '0'),
+    ('panama', '+507', 'pa', '0'),
+    ('paraguay', '+595', 'py', '0'),
+    ('peru', '+51', 'pe', '0'),
+    ('puerto rico', '+1-787', 'pr', '0'),
+    ('uruguay', '+598', 'uy', '0'),
+    ('venezuela', '+58', 've', '0');
 
 commit;
 
--- PROVINCES ECUADOR
-INSERT INTO
+-- provinces ecuador
+insert into
     core.core_province (
         pro_name,
         pro_code,
@@ -34,40 +34,40 @@ INSERT INTO
         pro_prefix,
         pro_record_status
     )
-VALUES
-    ('Azuay', '01', 9, 'AZ', '0'),
-    ('Bolívar', '02', 9, 'BO', '0'),
-    ('Cañar', '03', 9, 'CA', '0'),
-    ('Carchi', '04', 9, 'CR', '0'),
-    ('Chimborazo', '05', 9, 'CH', '0'),
-    ('Cotopaxi', '06', 9, 'CO', '0'),
-    ('El Oro', '07', 9, 'EO', '0'),
-    ('Esmeraldas', '08', 9, 'ES', '0'),
-    ('Galápagos', '09', 9, 'GA', '0'),
-    ('Guayas', '10', 9, 'GU', '0'),
-    ('Imbabura', '11', 9, 'IM', '0'),
-    ('Loja', '12', 9, 'LO', '0'),
-    ('Los Ríos', '13', 9, 'LR', '0'),
-    ('Manabí', '14', 9, 'MA', '0'),
-    ('Morona Santiago', '15', 9, 'MS', '0'),
-    ('Napo', '16', 9, 'NA', '0'),
-    ('Orellana', '17', 9, 'OR', '0'),
-    ('Pastaza', '18', 9, 'PA', '0'),
-    ('Pichincha', '19', 9, 'PI', '0'),
-    ('Santa Elena', '20', 9, 'SE', '0'),
+values
+    ('azuay', '01', 9, 'az', '0'),
+    ('bolívar', '02', 9, 'bo', '0'),
+    ('cañar', '03', 9, 'ca', '0'),
+    ('carchi', '04', 9, 'cr', '0'),
+    ('chimborazo', '05', 9, 'ch', '0'),
+    ('cotopaxi', '06', 9, 'co', '0'),
+    ('el oro', '07', 9, 'eo', '0'),
+    ('esmeraldas', '08', 9, 'es', '0'),
+    ('galápagos', '09', 9, 'ga', '0'),
+    ('guayas', '10', 9, 'gu', '0'),
+    ('imbabura', '11', 9, 'im', '0'),
+    ('loja', '12', 9, 'lo', '0'),
+    ('los ríos', '13', 9, 'lr', '0'),
+    ('manabí', '14', 9, 'ma', '0'),
+    ('morona santiago', '15', 9, 'ms', '0'),
+    ('napo', '16', 9, 'na', '0'),
+    ('orellana', '17', 9, 'or', '0'),
+    ('pastaza', '18', 9, 'pa', '0'),
+    ('pichincha', '19', 9, 'pi', '0'),
+    ('santa elena', '20', 9, 'se', '0'),
     (
-        'Santo Domingo de los Tsáchilas',
+        'santo domingo de los tsáchilas',
         '21',
         9,
-        'SD',
+        'sd',
         '0'
     ),
-    ('Sucumbíos', '22', 9, 'SU', '0'),
-    ('Tungurahua', '23', 9, 'TU', '0'),
-    ('Zamora Chinchipe', '24', 9, 'ZC', '0');
+    ('sucumbíos', '22', 9, 'su', '0'),
+    ('tungurahua', '23', 9, 'tu', '0'),
+    ('zamora chinchipe', '24', 9, 'zc', '0');
 
--- PROVINCES COLOMBIA
-INSERT INTO
+-- provinces colombia
+insert into
     core.core_province (
         pro_name,
         pro_code,
@@ -75,804 +75,804 @@ INSERT INTO
         pro_prefix,
         pro_record_status
     )
-VALUES
-    ('Amazonas', '01', 5, 'AMA', '0'),
-    ('Antioquia', '02', 5, 'ANT', '0'),
-    ('Arauca', '03', 5, 'ARA', '0'),
-    ('Atlántico', '04', 5, 'ATL', '0'),
-    ('Bolívar', '05', 5, 'BOL', '0'),
-    ('Boyacá', '06', 5, 'BOY', '0'),
-    ('Caldas', '07', 5, 'CAL', '0'),
-    ('Caquetá', '08', 5, 'CAQ', '0'),
-    ('Casanare', '09', 5, 'CAS', '0'),
-    ('Cauca', '10', 5, 'CAU', '0'),
-    ('Cesar', '11', 5, 'CES', '0'),
-    ('Chocó', '12', 5, 'CHO', '0'),
-    ('Córdoba', '13', 5, 'COR', '0'),
-    ('Cundinamarca', '14', 5, 'CUN', '0'),
-    ('Guainía', '15', 5, 'GUA', '0'),
-    ('Guaviare', '16', 5, 'GUV', '0'),
-    ('Huila', '17', 5, 'HUI', '0'),
-    ('La Guajira', '18', 5, 'LGU', '0'),
-    ('Magdalena', '19', 5, 'MAG', '0'),
-    ('Meta', '20', 5, 'MET', '0'),
-    ('Nariño', '21', 5, 'NAR', '0'),
-    ('Norte de Santander', '22', 5, 'NSA', '0'),
-    ('Putumayo', '23', 5, 'PUT', '0'),
-    ('Quindío', '24', 5, 'QUI', '0'),
-    ('Risaralda', '25', 5, 'RIS', '0'),
-    ('San Andrés y Providencia', '26', 5, 'SAP', '0'),
-    ('Santander', '27', 5, 'SAN', '0'),
-    ('Sucre', '28', 5, 'SUC', '0'),
-    ('Tolima', '29', 5, 'TOL', '0'),
-    ('Valle del Cauca', '30', 5, 'VCA', '0'),
-    ('Vaupés', '31', 5, 'VAU', '0'),
-    ('Vichada', '32', 5, 'VIC', '0');
+values
+    ('amazonas', '01', 5, 'ama', '0'),
+    ('antioquia', '02', 5, 'ant', '0'),
+    ('arauca', '03', 5, 'ara', '0'),
+    ('atlántico', '04', 5, 'atl', '0'),
+    ('bolívar', '05', 5, 'bol', '0'),
+    ('boyacá', '06', 5, 'boy', '0'),
+    ('caldas', '07', 5, 'cal', '0'),
+    ('caquetá', '08', 5, 'caq', '0'),
+    ('casanare', '09', 5, 'cas', '0'),
+    ('cauca', '10', 5, 'cau', '0'),
+    ('cesar', '11', 5, 'ces', '0'),
+    ('chocó', '12', 5, 'cho', '0'),
+    ('córdoba', '13', 5, 'cor', '0'),
+    ('cundinamarca', '14', 5, 'cun', '0'),
+    ('guainía', '15', 5, 'gua', '0'),
+    ('guaviare', '16', 5, 'guv', '0'),
+    ('huila', '17', 5, 'hui', '0'),
+    ('la guajira', '18', 5, 'lgu', '0'),
+    ('magdalena', '19', 5, 'mag', '0'),
+    ('meta', '20', 5, 'met', '0'),
+    ('nariño', '21', 5, 'nar', '0'),
+    ('norte de santander', '22', 5, 'nsa', '0'),
+    ('putumayo', '23', 5, 'put', '0'),
+    ('quindío', '24', 5, 'qui', '0'),
+    ('risaralda', '25', 5, 'ris', '0'),
+    ('san andrés y providencia', '26', 5, 'sap', '0'),
+    ('santander', '27', 5, 'san', '0'),
+    ('sucre', '28', 5, 'suc', '0'),
+    ('tolima', '29', 5, 'tol', '0'),
+    ('valle del cauca', '30', 5, 'vca', '0'),
+    ('vaupés', '31', 5, 'vau', '0'),
+    ('vichada', '32', 5, 'vic', '0');
 
 commit;
 
--- CITIES ECUADOR
--- Azuay (ID 1)
-INSERT INTO
+-- cities ecuador
+-- azuay (id 1)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Cuenca', 9, 1, '0'),
-    ('Gualaceo', 9, 1, '0'),
-    ('Paute', 9, 1, '0'),
-    ('Sígsig', 9, 1, '0'),
-    ('Chordeleg', 9, 1, '0');
+values
+    ('cuenca', 9, 1, '0'),
+    ('gualaceo', 9, 1, '0'),
+    ('paute', 9, 1, '0'),
+    ('sígsig', 9, 1, '0'),
+    ('chordeleg', 9, 1, '0');
 
--- Bolívar (ID 2)
-INSERT INTO
+-- bolívar (id 2)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Guaranda', 9, 2, '0'),
-    ('Chillanes', 9, 2, '0'),
-    ('Chimbo', 9, 2, '0'),
-    ('Echeandía', 9, 2, '0'),
-    ('San Miguel', 9, 2, '0');
+values
+    ('guaranda', 9, 2, '0'),
+    ('chillanes', 9, 2, '0'),
+    ('chimbo', 9, 2, '0'),
+    ('echeandía', 9, 2, '0'),
+    ('san miguel', 9, 2, '0');
 
--- Cañar (ID 3)
-INSERT INTO
+-- cañar (id 3)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Azogues', 9, 3, '0'),
-    ('Biblián', 9, 3, '0'),
-    ('Cañar', 9, 3, '0'),
-    ('La Troncal', 9, 3, '0'),
-    ('El Tambo', 9, 3, '0');
+values
+    ('azogues', 9, 3, '0'),
+    ('biblián', 9, 3, '0'),
+    ('cañar', 9, 3, '0'),
+    ('la troncal', 9, 3, '0'),
+    ('el tambo', 9, 3, '0');
 
--- Carchi (ID 4)
-INSERT INTO
+-- carchi (id 4)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Tulcán', 9, 4, '0'),
-    ('Bolívar', 9, 4, '0'),
-    ('Espejo', 9, 4, '0'),
-    ('Mira', 9, 4, '0'),
-    ('Montúfar', 9, 4, '0');
+values
+    ('tulcán', 9, 4, '0'),
+    ('bolívar', 9, 4, '0'),
+    ('espejo', 9, 4, '0'),
+    ('mira', 9, 4, '0'),
+    ('montúfar', 9, 4, '0');
 
--- Chimborazo (ID 5)
-INSERT INTO
+-- chimborazo (id 5)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Riobamba', 9, 5, '0'),
-    ('Alausí', 9, 5, '0'),
-    ('Chambo', 9, 5, '0'),
-    ('Chunchi', 9, 5, '0'),
-    ('Guamote', 9, 5, '0');
+values
+    ('riobamba', 9, 5, '0'),
+    ('alausí', 9, 5, '0'),
+    ('chambo', 9, 5, '0'),
+    ('chunchi', 9, 5, '0'),
+    ('guamote', 9, 5, '0');
 
--- Cotopaxi (ID 6)
-INSERT INTO
+-- cotopaxi (id 6)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Latacunga', 9, 6, '0'),
-    ('La Maná', 9, 6, '0'),
-    ('Pangua', 9, 6, '0'),
-    ('Pujilí', 9, 6, '0'),
-    ('Salcedo', 9, 6, '0');
+values
+    ('latacunga', 9, 6, '0'),
+    ('la maná', 9, 6, '0'),
+    ('pangua', 9, 6, '0'),
+    ('pujilí', 9, 6, '0'),
+    ('salcedo', 9, 6, '0');
 
--- El Oro (ID 7)
-INSERT INTO
+-- el oro (id 7)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Machala', 9, 7, '0'),
-    ('Arenillas', 9, 7, '0'),
-    ('Atahualpa', 9, 7, '0'),
-    ('Balsas', 9, 7, '0'),
-    ('Chilla', 9, 7, '0');
+values
+    ('machala', 9, 7, '0'),
+    ('arenillas', 9, 7, '0'),
+    ('atahualpa', 9, 7, '0'),
+    ('balsas', 9, 7, '0'),
+    ('chilla', 9, 7, '0');
 
--- Esmeraldas (ID 8)
-INSERT INTO
+-- esmeraldas (id 8)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Esmeraldas', 9, 8, '0'),
-    ('Atacames', 9, 8, '0'),
-    ('Eloy Alfaro', 9, 8, '0'),
-    ('Muisne', 9, 8, '0'),
-    ('Quinindé', 9, 8, '0');
+values
+    ('esmeraldas', 9, 8, '0'),
+    ('atacames', 9, 8, '0'),
+    ('eloy alfaro', 9, 8, '0'),
+    ('muisne', 9, 8, '0'),
+    ('quinindé', 9, 8, '0');
 
--- Galápagos (ID 9)
-INSERT INTO
+-- galápagos (id 9)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Puerto Ayora', 9, 9, '0'),
-    ('Puerto Baquerizo Moreno', 9, 9, '0'),
-    ('Puerto Villamil', 9, 9, '0');
+values
+    ('puerto ayora', 9, 9, '0'),
+    ('puerto baquerizo moreno', 9, 9, '0'),
+    ('puerto villamil', 9, 9, '0');
 
--- Guayas (ID 10)
-INSERT INTO
+-- guayas (id 10)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Guayaquil', 9, 10, '0'),
-    ('Durán', 9, 10, '0'),
-    ('Milagro', 9, 10, '0'),
-    ('Samborondón', 9, 10, '0'),
-    ('Daule', 9, 10, '0');
+values
+    ('guayaquil', 9, 10, '0'),
+    ('durán', 9, 10, '0'),
+    ('milagro', 9, 10, '0'),
+    ('samborondón', 9, 10, '0'),
+    ('daule', 9, 10, '0');
 
--- Imbabura (ID 11)
-INSERT INTO
+-- imbabura (id 11)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Ibarra', 9, 11, '0'),
-    ('Antonio Ante', 9, 11, '0'),
-    ('Cotacachi', 9, 11, '0'),
-    ('Otavalo', 9, 11, '0'),
-    ('Pimampiro', 9, 11, '0');
+values
+    ('ibarra', 9, 11, '0'),
+    ('antonio ante', 9, 11, '0'),
+    ('cotacachi', 9, 11, '0'),
+    ('otavalo', 9, 11, '0'),
+    ('pimampiro', 9, 11, '0');
 
--- Loja (ID 12)
-INSERT INTO
+-- loja (id 12)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Loja', 9, 12, '0'),
-    ('Calvas', 9, 12, '0'),
-    ('Catamayo', 9, 12, '0'),
-    ('Celica', 9, 12, '0'),
-    ('Chaguarpamba', 9, 12, '0');
+values
+    ('loja', 9, 12, '0'),
+    ('calvas', 9, 12, '0'),
+    ('catamayo', 9, 12, '0'),
+    ('celica', 9, 12, '0'),
+    ('chaguarpamba', 9, 12, '0');
 
--- Los Ríos (ID 13)
-INSERT INTO
+-- los ríos (id 13)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Babahoyo', 9, 13, '0'),
-    ('Buena Fe', 9, 13, '0'),
-    ('Quevedo', 9, 13, '0'),
-    ('Vinces', 9, 13, '0'),
-    ('Ventanas', 9, 13, '0');
+values
+    ('babahoyo', 9, 13, '0'),
+    ('buena fe', 9, 13, '0'),
+    ('quevedo', 9, 13, '0'),
+    ('vinces', 9, 13, '0'),
+    ('ventanas', 9, 13, '0');
 
--- Manabí (ID 14)
-INSERT INTO
+-- manabí (id 14)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Portoviejo', 9, 14, '0'),
-    ('Manta', 9, 14, '0'),
-    ('Chone', 9, 14, '0'),
-    ('Bahía de Caráquez', 9, 14, '0'),
-    ('Jipijapa', 9, 14, '0');
+values
+    ('portoviejo', 9, 14, '0'),
+    ('manta', 9, 14, '0'),
+    ('chone', 9, 14, '0'),
+    ('bahía de caráquez', 9, 14, '0'),
+    ('jipijapa', 9, 14, '0');
 
--- Morona Santiago (ID 15)
-INSERT INTO
+-- morona santiago (id 15)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Macas', 9, 15, '0'),
-    ('Gualaquiza', 9, 15, '0'),
-    ('Huamboya', 9, 15, '0'),
-    ('Limón Indanza', 9, 15, '0'),
-    ('Santiago', 9, 15, '0');
+values
+    ('macas', 9, 15, '0'),
+    ('gualaquiza', 9, 15, '0'),
+    ('huamboya', 9, 15, '0'),
+    ('limón indanza', 9, 15, '0'),
+    ('santiago', 9, 15, '0');
 
--- Napo (ID 16)
-INSERT INTO
+-- napo (id 16)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Tena', 9, 16, '0'),
-    ('Archidona', 9, 16, '0'),
-    ('El Chaco', 9, 16, '0'),
-    ('Quijos', 9, 16, '0'),
-    ('Carlos Julio Arosemena Tola', 9, 16, '0');
+values
+    ('tena', 9, 16, '0'),
+    ('archidona', 9, 16, '0'),
+    ('el chaco', 9, 16, '0'),
+    ('quijos', 9, 16, '0'),
+    ('carlos julio arosemena tola', 9, 16, '0');
 
--- Orellana (ID 17)
-INSERT INTO
+-- orellana (id 17)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Francisco de Orellana', 9, 17, '0'),
-    ('Aguarico', 9, 17, '0'),
-    ('La Joya de los Sachas', 9, 17, '0'),
-    ('Loreto', 9, 17, '0');
+values
+    ('francisco de orellana', 9, 17, '0'),
+    ('aguarico', 9, 17, '0'),
+    ('la joya de los sachas', 9, 17, '0'),
+    ('loreto', 9, 17, '0');
 
--- Pastaza (ID 18)
-INSERT INTO
+-- pastaza (id 18)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Puyo', 9, 18, '0'),
-    ('Mera', 9, 18, '0'),
-    ('Santa Clara', 9, 18, '0'),
-    ('Arajuno', 9, 18, '0');
+values
+    ('puyo', 9, 18, '0'),
+    ('mera', 9, 18, '0'),
+    ('santa clara', 9, 18, '0'),
+    ('arajuno', 9, 18, '0');
 
--- Pichincha (ID 19)
-INSERT INTO
+-- pichincha (id 19)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Quito', 9, 19, '0'),
-    ('Cayambe', 9, 19, '0'),
-    ('Mejía', 9, 19, '0'),
-    ('Pedro Moncayo', 9, 19, '0'),
-    ('Rumiñahui', 9, 19, '0');
+values
+    ('quito', 9, 19, '0'),
+    ('cayambe', 9, 19, '0'),
+    ('mejía', 9, 19, '0'),
+    ('pedro moncayo', 9, 19, '0'),
+    ('rumiñahui', 9, 19, '0');
 
--- Santa Elena (ID 20)
-INSERT INTO
+-- santa elena (id 20)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Santa Elena', 9, 20, '0'),
-    ('La Libertad', 9, 20, '0'),
-    ('Salinas', 9, 20, '0');
+values
+    ('santa elena', 9, 20, '0'),
+    ('la libertad', 9, 20, '0'),
+    ('salinas', 9, 20, '0');
 
--- Santo Domingo de los Tsáchilas (ID 21)
-INSERT INTO
+-- santo domingo de los tsáchilas (id 21)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Santo Domingo', 9, 21, '0'),
-    ('La Concordia', 9, 21, '0');
+values
+    ('santo domingo', 9, 21, '0'),
+    ('la concordia', 9, 21, '0');
 
--- Sucumbíos (ID 22)
-INSERT INTO
+-- sucumbíos (id 22)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Nueva Loja', 9, 22, '0'),
-    ('Cascales', 9, 22, '0'),
-    ('Cuyabeno', 9, 22, '0'),
-    ('Gonzalo Pizarro', 9, 22, '0'),
-    ('Lago Agrio', 9, 22, '0');
+values
+    ('nueva loja', 9, 22, '0'),
+    ('cascales', 9, 22, '0'),
+    ('cuyabeno', 9, 22, '0'),
+    ('gonzalo pizarro', 9, 22, '0'),
+    ('lago agrio', 9, 22, '0');
 
--- Tungurahua (ID 23)
-INSERT INTO
+-- tungurahua (id 23)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Ambato', 9, 23, '0'),
-    ('Baños de Agua Santa', 9, 23, '0'),
-    ('Cevallos', 9, 23, '0'),
-    ('Mocha', 9, 23, '0'),
-    ('Patate', 9, 23, '0');
+values
+    ('ambato', 9, 23, '0'),
+    ('baños de agua santa', 9, 23, '0'),
+    ('cevallos', 9, 23, '0'),
+    ('mocha', 9, 23, '0'),
+    ('patate', 9, 23, '0');
 
--- Zamora Chinchipe (ID 24)
-INSERT INTO
+-- zamora chinchipe (id 24)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Zamora', 9, 24, '0'),
-    ('Chinchipe', 9, 24, '0'),
-    ('Nangaritza', 9, 24, '0'),
-    ('Yacuambi', 9, 24, '0'),
-    ('Yantzaza', 9, 24, '0');
+values
+    ('zamora', 9, 24, '0'),
+    ('chinchipe', 9, 24, '0'),
+    ('nangaritza', 9, 24, '0'),
+    ('yacuambi', 9, 24, '0'),
+    ('yantzaza', 9, 24, '0');
 
--- CITIES COLOMBIA
--- Amazonas (ID 1)
-INSERT INTO
+-- cities colombia
+-- amazonas (id 1)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Leticia', 5, 1, '0'),
-    ('Puerto Nariño', 5, 1, '0');
+values
+    ('leticia', 5, 1, '0'),
+    ('puerto nariño', 5, 1, '0');
 
--- Antioquia (ID 2)
-INSERT INTO
+-- antioquia (id 2)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Medellín', 5, 2, '0'),
-    ('Bello', 5, 2, '0'),
-    ('Itagüí', 5, 2, '0'),
-    ('Envigado', 5, 2, '0'),
-    ('Apartadó', 5, 2, '0');
+values
+    ('medellín', 5, 2, '0'),
+    ('bello', 5, 2, '0'),
+    ('itagüí', 5, 2, '0'),
+    ('envigado', 5, 2, '0'),
+    ('apartadó', 5, 2, '0');
 
--- Arauca (ID 3)
-INSERT INTO
+-- arauca (id 3)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Arauca', 5, 3, '0'),
-    ('Arauquita', 5, 3, '0'),
-    ('Saravena', 5, 3, '0');
+values
+    ('arauca', 5, 3, '0'),
+    ('arauquita', 5, 3, '0'),
+    ('saravena', 5, 3, '0');
 
--- Atlántico (ID 4)
-INSERT INTO
+-- atlántico (id 4)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Barranquilla', 5, 4, '0'),
-    ('Soledad', 5, 4, '0'),
-    ('Malambo', 5, 4, '0');
+values
+    ('barranquilla', 5, 4, '0'),
+    ('soledad', 5, 4, '0'),
+    ('malambo', 5, 4, '0');
 
--- Bolívar (ID 5)
-INSERT INTO
+-- bolívar (id 5)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Cartagena', 5, 5, '0'),
-    ('Magangué', 5, 5, '0'),
-    ('Turbaco', 5, 5, '0');
+values
+    ('cartagena', 5, 5, '0'),
+    ('magangué', 5, 5, '0'),
+    ('turbaco', 5, 5, '0');
 
--- Boyacá (ID 6)
-INSERT INTO
+-- boyacá (id 6)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Tunja', 5, 6, '0'),
-    ('Duitama', 5, 6, '0'),
-    ('Sogamoso', 5, 6, '0');
+values
+    ('tunja', 5, 6, '0'),
+    ('duitama', 5, 6, '0'),
+    ('sogamoso', 5, 6, '0');
 
--- Caldas (ID 7)
-INSERT INTO
+-- caldas (id 7)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Manizales', 5, 7, '0'),
-    ('Villamaría', 5, 7, '0'),
-    ('Chinchiná', 5, 7, '0');
+values
+    ('manizales', 5, 7, '0'),
+    ('villamaría', 5, 7, '0'),
+    ('chinchiná', 5, 7, '0');
 
--- Caquetá (ID 8)
-INSERT INTO
+-- caquetá (id 8)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Florencia', 5, 8, '0'),
-    ('San Vicente del Caguán', 5, 8, '0');
+values
+    ('florencia', 5, 8, '0'),
+    ('san vicente del caguán', 5, 8, '0');
 
--- Casanare (ID 9)
-INSERT INTO
+-- casanare (id 9)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Yopal', 5, 9, '0'),
-    ('Aguazul', 5, 9, '0'),
-    ('Villanueva', 5, 9, '0');
+values
+    ('yopal', 5, 9, '0'),
+    ('aguazul', 5, 9, '0'),
+    ('villanueva', 5, 9, '0');
 
--- Cauca (ID 10)
-INSERT INTO
+-- cauca (id 10)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Popayán', 5, 10, '0'),
-    ('Santander de Quilichao', 5, 10, '0'),
-    ('Guapi', 5, 10, '0');
+values
+    ('popayán', 5, 10, '0'),
+    ('santander de quilichao', 5, 10, '0'),
+    ('guapi', 5, 10, '0');
 
--- Cesar (ID 11)
-INSERT INTO
+-- cesar (id 11)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Valledupar', 5, 11, '0'),
-    ('Aguachica', 5, 11, '0'),
-    ('Bosconia', 5, 11, '0');
+values
+    ('valledupar', 5, 11, '0'),
+    ('aguachica', 5, 11, '0'),
+    ('bosconia', 5, 11, '0');
 
--- Chocó (ID 12)
-INSERT INTO
+-- chocó (id 12)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Quibdó', 5, 12, '0'),
-    ('Istmina', 5, 12, '0'),
-    ('Riosucio', 5, 12, '0');
+values
+    ('quibdó', 5, 12, '0'),
+    ('istmina', 5, 12, '0'),
+    ('riosucio', 5, 12, '0');
 
--- Córdoba (ID 13)
-INSERT INTO
+-- córdoba (id 13)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Montería', 5, 13, '0'),
-    ('Cereté', 5, 13, '0'),
-    ('Sahagún', 5, 13, '0');
+values
+    ('montería', 5, 13, '0'),
+    ('cereté', 5, 13, '0'),
+    ('sahagún', 5, 13, '0');
 
--- Cundinamarca (ID 14)
-INSERT INTO
+-- cundinamarca (id 14)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Bogotá', 5, 14, '0'),
-    ('Soacha', 5, 14, '0'),
-    ('Girardot', 5, 14, '0');
+values
+    ('bogotá', 5, 14, '0'),
+    ('soacha', 5, 14, '0'),
+    ('girardot', 5, 14, '0');
 
--- Guainía (ID 15)
-INSERT INTO
+-- guainía (id 15)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Inírida', 5, 15, '0');
+values
+    ('inírida', 5, 15, '0');
 
--- Guaviare (ID 16)
-INSERT INTO
+-- guaviare (id 16)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('San José del Guaviare', 5, 16, '0');
+values
+    ('san josé del guaviare', 5, 16, '0');
 
--- Huila (ID 17)
-INSERT INTO
+-- huila (id 17)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Neiva', 5, 17, '0'),
-    ('Pitalito', 5, 17, '0'),
-    ('Garzón', 5, 17, '0');
+values
+    ('neiva', 5, 17, '0'),
+    ('pitalito', 5, 17, '0'),
+    ('garzón', 5, 17, '0');
 
--- La Guajira (ID 18)
-INSERT INTO
+-- la guajira (id 18)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Riohacha', 5, 18, '0'),
-    ('Maicao', 5, 18, '0'),
-    ('Uribia', 5, 18, '0');
+values
+    ('riohacha', 5, 18, '0'),
+    ('maicao', 5, 18, '0'),
+    ('uribia', 5, 18, '0');
 
--- Magdalena (ID 19)
-INSERT INTO
+-- magdalena (id 19)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Santa Marta', 5, 19, '0'),
-    ('Ciénaga', 5, 19, '0'),
-    ('Fundación', 5, 19, '0');
+values
+    ('santa marta', 5, 19, '0'),
+    ('ciénaga', 5, 19, '0'),
+    ('fundación', 5, 19, '0');
 
--- Meta (ID 20)
-INSERT INTO
+-- meta (id 20)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Villavicencio', 5, 20, '0'),
-    ('Acacías', 5, 20, '0'),
-    ('Granada', 5, 20, '0');
+values
+    ('villavicencio', 5, 20, '0'),
+    ('acacías', 5, 20, '0'),
+    ('granada', 5, 20, '0');
 
--- Nariño (ID 21)
-INSERT INTO
+-- nariño (id 21)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Pasto', 5, 21, '0'),
-    ('Tumaco', 5, 21, '0'),
-    ('Ipiales', 5, 21, '0');
+values
+    ('pasto', 5, 21, '0'),
+    ('tumaco', 5, 21, '0'),
+    ('ipiales', 5, 21, '0');
 
--- Norte de Santander (ID 22)
-INSERT INTO
+-- norte de santander (id 22)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Cúcuta', 5, 22, '0'),
-    ('Ocaña', 5, 22, '0'),
-    ('Pamplona', 5, 22, '0');
+values
+    ('cúcuta', 5, 22, '0'),
+    ('ocaña', 5, 22, '0'),
+    ('pamplona', 5, 22, '0');
 
--- Putumayo (ID 23)
-INSERT INTO
+-- putumayo (id 23)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Mocoa', 5, 23, '0'),
-    ('Puerto Asís', 5, 23, '0');
+values
+    ('mocoa', 5, 23, '0'),
+    ('puerto asís', 5, 23, '0');
 
--- Quindío (ID 24)
-INSERT INTO
+-- quindío (id 24)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Armenia', 5, 24, '0'),
-    ('Calarcá', 5, 24, '0'),
-    ('La Tebaida', 5, 24, '0');
+values
+    ('armenia', 5, 24, '0'),
+    ('calarcá', 5, 24, '0'),
+    ('la tebaida', 5, 24, '0');
 
--- Risaralda (ID 25)
-INSERT INTO
+-- risaralda (id 25)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Pereira', 5, 25, '0'),
-    ('Dosquebradas', 5, 25, '0'),
-    ('Santa Rosa de Cabal', 5, 25, '0');
+values
+    ('pereira', 5, 25, '0'),
+    ('dosquebradas', 5, 25, '0'),
+    ('santa rosa de cabal', 5, 25, '0');
 
--- San Andrés y Providencia (ID 26)
-INSERT INTO
+-- san andrés y providencia (id 26)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('San Andrés', 5, 26, '0'),
-    ('Providencia', 5, 26, '0');
+values
+    ('san andrés', 5, 26, '0'),
+    ('providencia', 5, 26, '0');
 
--- Santander (ID 27)
-INSERT INTO
+-- santander (id 27)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Bucaramanga', 5, 27, '0'),
-    ('Floridablanca', 5, 27, '0'),
-    ('Barrancabermeja', 5, 27, '0');
+values
+    ('bucaramanga', 5, 27, '0'),
+    ('floridablanca', 5, 27, '0'),
+    ('barrancabermeja', 5, 27, '0');
 
--- Sucre (ID 28)
-INSERT INTO
+-- sucre (id 28)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Sincelejo', 5, 28, '0'),
-    ('Corozal', 5, 28, '0'),
-    ('Sampués', 5, 28, '0');
+values
+    ('sincelejo', 5, 28, '0'),
+    ('corozal', 5, 28, '0'),
+    ('sampués', 5, 28, '0');
 
--- Tolima (ID 29)
-INSERT INTO
+-- tolima (id 29)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Ibagué', 5, 29, '0'),
-    ('Espinal', 5, 29, '0'),
-    ('Melgar', 5, 29, '0');
+values
+    ('ibagué', 5, 29, '0'),
+    ('espinal', 5, 29, '0'),
+    ('melgar', 5, 29, '0');
 
--- Valle del Cauca (ID 30)
-INSERT INTO
+-- valle del cauca (id 30)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Cali', 5, 30, '0'),
-    ('Palmira', 5, 30, '0'),
-    ('Buenaventura', 5, 30, '0');
+values
+    ('cali', 5, 30, '0'),
+    ('palmira', 5, 30, '0'),
+    ('buenaventura', 5, 30, '0');
 
--- Vaupés (ID 31)
-INSERT INTO
+-- vaupés (id 31)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Mitú', 5, 31, '0');
+values
+    ('mitú', 5, 31, '0');
 
--- Vichada (ID 32)
-INSERT INTO
+-- vichada (id 32)
+insert into
     core.core_city (
         cit_name,
         id_country,
         id_province,
         cit_record_status
     )
-VALUES
-    ('Puerto Carreño', 5, 32, '0');
+values
+    ('puerto carreño', 5, 32, '0');
 
 commit;
 
-------------------- USERS -------------------
+------------------- users -------------------
 insert into
     core.core_user (
         use_name,
@@ -885,8 +885,8 @@ insert into
     )
 values
     (
-        'Luis',
-        'Berrezueta',
+        'luis',
+        'berrezueta',
         'luis@gmail.com',
         'password',
         null,
@@ -906,8 +906,8 @@ insert into
     )
 values
     (
-        'Maria',
-        'Sanchez',
+        'maria',
+        'sanchez',
         'msanchexz@gmail.com',
         'password',
         null,
@@ -927,8 +927,8 @@ insert into
     )
 values
     (
-        'Andres',
-        'Montero',
+        'andres',
+        'montero',
         'amontero192@gmail.com',
         'password',
         null,
@@ -948,8 +948,8 @@ insert into
     )
 values
     (
-        'Jina',
-        'Ferrero',
+        'jina',
+        'ferrero',
         'jianaafer@gmail.com',
         'password',
         null,
@@ -959,7 +959,7 @@ values
 
 commit;
 
-------------------- ROLES -------------------
+------------------- roles -------------------
 insert into
     core.core_role (
         rol_name,
@@ -968,7 +968,7 @@ insert into
         rol_record_status
     )
 values
-    ('ADMIN', 'Admin role', current_timestamp, '0');
+    ('admin', 'admin role', current_timestamp, '0');
 
 insert into
     core.core_role (
@@ -979,8 +979,8 @@ insert into
     )
 values
     (
-        'DEVELOPER',
-        'Developer role',
+        'developer',
+        'developer role',
         current_timestamp,
         '0'
     );
@@ -993,7 +993,7 @@ insert into
         rol_record_status
     )
 values
-    ('USER', 'User role', current_timestamp, '0');
+    ('user', 'user role', current_timestamp, '0');
 
 insert into
     core.core_role (
@@ -1003,7 +1003,7 @@ insert into
         rol_record_status
     )
 values
-    ('DOCTOR', 'User role', current_timestamp, '0');
+    ('doctor', 'user role', current_timestamp, '0');
 
 insert into
     core.core_role (
@@ -1013,11 +1013,11 @@ insert into
         rol_record_status
     )
 values
-    ('PATIENT', 'User role', current_timestamp, '0');
+    ('patient', 'user role', current_timestamp, '0');
 
 commit;
 
-------------------- USER ROLES -------------------
+------------------- user roles -------------------
 insert into
     core.core_user_role (
         uro_created_date,
@@ -1110,7 +1110,7 @@ values
 
 commit;
 
-------------------- GENRE -------------------
+------------------- genre -------------------
 insert into
     core.core_genre (
         gen_name,
@@ -1209,7 +1209,7 @@ values
 
 commit;
 
-------------------- IDENTIFICATION TYPE -------------------
+------------------- identification type -------------------
 insert into
     core.core_identification_type (
         ity_name,
@@ -1232,7 +1232,7 @@ values
             from
                 core.core_country cc
             where
-                cc.cou_prefix = 'EC'
+                cc.cou_prefix = 'ec'
         )
     );
 
@@ -1258,13 +1258,13 @@ values
             from
                 core.core_country cc
             where
-                cc.cou_prefix = 'EC'
+                cc.cou_prefix = 'ec'
         )
     );
 
 commit;
 
-------------------- PHONE TYPE -------------------
+------------------- phone type -------------------
 insert into
     core.core_phone_type (
         pty_name,
@@ -1312,7 +1312,7 @@ values
 
 commit;
 
-------------------- NOTIFICATION TYPE -------------------
+------------------- notification type -------------------
 insert into
     core.core_notification_type (
         nty_name,
