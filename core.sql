@@ -119,21 +119,3 @@ create table
     ses_user_agent varchar(255),
     constraint fk1_core_sessions foreign key (id_user) references core.core_user (use_id)
   );
-
--- TODO
-create table
-  core.core_constant (
-    con_id serial primary key,
-    con_name varchar(100) not null,
-    con_value_id int not null,
-    con_created_date timestamp default current_timestamp,
-    con_record_status varchar(1) not null
-  );
-
-create table
-  core.core_status (
-    sta_id serial primary key,
-    sta_name varchar(100) not null,
-    sta_created_date timestamp default current_timestamp,
-    sta_record_status varchar(1) not null
-  );
