@@ -126,12 +126,11 @@ create table
     mhi_disease varchar(100) not null,
     mhi_description varchar(200) not null,
     mhi_diagnostic_date timestamp default current_timestamp,
+    mhi_state varchar(50) not null,
     mhi_created_date timestamp default current_timestamp,
     mhi_record_status varchar(1) not null,
-    id_status int not null,
     id_client int not null,
-    constraint fk1_data_medical_history foreign key (id_status) references core.core_status (sta_id),
-    constraint fk2_data_medical_history foreign key (id_client) references data.data_client (cli_id)
+    constraint fk1_data_medical_history foreign key (id_client) references data.data_client (cli_id)
   );
 
 create table
@@ -190,18 +189,17 @@ create table
     app_date timestamp not null,
     app_start_time time not null,
     app_end_time time not null,
+    app_state varchar(50) not null,
     app_created_date timestamp default current_timestamp,
     app_record_status varchar(1) not null,
     id_appointment_manager int not null,
     id_client int not null,
     id_consultation int not null,
     id_address int not null,
-    id_status int not null,
     constraint fk1_data_appointment foreign key (id_appointment_manager) references data.data_appointment_manager (ama_id),
     constraint fk2_data_appointment foreign key (id_client) references data.data_client (cli_id),
     constraint fk3_data_appointment foreign key (id_consultation) references data.data_consultation (con_id),
-    constraint fk4_data_appointment foreign key (id_address) references data.data_address (add_id),
-    constraint fk5_data_appointment foreign key (id_status) references core.core_status (sta_id)
+    constraint fk4_data_appointment foreign key (id_address) references data.data_address (add_id)
   );
 
 create table
