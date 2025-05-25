@@ -1312,54 +1312,6 @@ values
 
 commit;
 
-------------------- PAYMENT METHOD -------------------
-insert into
-    core.core_payment_method (
-        pme_name,
-        pme_description,
-        pme_created_date,
-        pme_record_status
-    )
-values
-    (
-        'efectivo',
-        'pago en efectivo',
-        current_timestamp,
-        '0'
-    );
-
-insert into
-    core.core_payment_method (
-        pme_name,
-        pme_description,
-        pme_created_date,
-        pme_record_status
-    )
-values
-    (
-        'tarjeta',
-        'pago con tarjeta de débito o crédito',
-        current_timestamp,
-        '0'
-    );
-
-insert into
-    core.core_payment_method (
-        pme_name,
-        pme_description,
-        pme_created_date,
-        pme_record_status
-    )
-values
-    (
-        'transferencia',
-        'pago mediante transferencia interbancaria',
-        current_timestamp,
-        '0'
-    );
-
-commit;
-
 ------------------- NOTIFICATION TYPE -------------------
 insert into
     core.core_notification_type (
