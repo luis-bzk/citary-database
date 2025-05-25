@@ -100,15 +100,6 @@ create table
   );
 
 create table
-  core.core_payment_method (
-    pme_id serial primary key,
-    pme_name varchar(100) not null,
-    pme_description varchar(300) not null,
-    pme_created_date timestamp default current_timestamp,
-    pme_record_status varchar(1) not null
-  );
-
-create table
   core.core_notification_type (
     nty_id serial primary key,
     nty_name varchar(100) not null,

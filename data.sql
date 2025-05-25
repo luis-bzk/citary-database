@@ -232,10 +232,8 @@ create table
     pay_record_status varchar(1) not null,
     id_consultation int not null,
     id_appointment int not null,
-    id_payment_method int not null,
     constraint fk1_data_payment foreign key (id_consultation) references data.data_consultation (con_id),
-    constraint fk2_data_payment foreign key (id_appointment) references data.data_appointment (app_id),
-    constraint fk3_data_payment foreign key (id_payment_method) references core.core_payment_method (pme_id)
+    constraint fk2_data_payment foreign key (id_appointment) references data.data_appointment (app_id)
   );
 
 create table
