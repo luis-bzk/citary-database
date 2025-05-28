@@ -4,7 +4,7 @@ create schema core;
 create table
   core.core_country (
     cou_id serial primary key,
-    cou_name varchar(100) not null,
+    cou_name varchar(50) not null,
     cou_code varchar(10) not null,
     cou_prefix varchar(10) not null,
     cou_created_date timestamp default current_timestamp,
@@ -14,7 +14,7 @@ create table
 create table
   core.core_province (
     pro_id serial primary key,
-    pro_name varchar(100) not null,
+    pro_name varchar(50) not null,
     pro_code varchar(10) not null,
     pro_prefix varchar(10) not null,
     pro_created_date timestamp default current_timestamp,
@@ -26,7 +26,7 @@ create table
 create table
   core.core_city (
     cit_id serial primary key,
-    cit_name varchar(100) not null,
+    cit_name varchar(50) not null,
     cit_created_date timestamp default current_timestamp,
     cit_record_status varchar(1) not null,
     id_province int not null,
@@ -93,7 +93,7 @@ create table
 create table
   core.core_phone_type (
     pty_id serial primary key,
-    pty_name varchar(100) not null,
+    pty_name varchar(50) not null,
     pty_description varchar(100),
     pty_created_date timestamp default current_timestamp,
     pty_record_status varchar(1) not null
@@ -102,8 +102,8 @@ create table
 create table
   core.core_notification_type (
     nty_id serial primary key,
-    nty_name varchar(100) not null,
-    nty_description varchar(300) not null,
+    nty_name varchar(50) not null,
+    nty_description varchar(100) not null,
     nty_created_date timestamp default current_timestamp,
     nty_record_status varchar(1) not null
   );
