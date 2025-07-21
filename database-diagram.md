@@ -1,6 +1,6 @@
-# Citary Database ERD
+# Real Estate Database ERD
 
-Este diagrama muestra todas las 37 tablas de la base de datos del sistema de gestión de restaurantes.
+Este diagrama muestra todas las 35 tablas de la base de datos del sistema de gestión inmobiliaria.
 
 ```mermaid
 erDiagram
@@ -106,7 +106,7 @@ erDiagram
         varchar(255) ses_user_agent
     }
     
-    %% Data Schema - 26 tables
+    %% Data Schema - 24 tables
     data_person {
         serial per_id PK
         varchar(20) per_identification_number
@@ -155,245 +155,233 @@ erDiagram
         int id_address_type FK
     }
     
-    data_restaurant {
-        serial res_id PK
-        varchar(200) res_name
-        varchar(200) res_business_name
-        varchar(13) res_ruc
-        varchar(100) res_email
-        varchar(13) res_phone
-        varchar(200) res_website
-        varchar(300) res_logo_url
-        text res_description
-        jsonb res_opening_hours
-        numeric res_tax_percentage
-        timestamp res_created_date
-        varchar(1) res_record_status
+    data_real_estate_agency {
+        serial rea_id PK
+        varchar(200) rea_name
+        varchar(200) rea_business_name
+        varchar(13) rea_ruc
+        varchar(100) rea_email
+        varchar(13) rea_phone
+        varchar(200) rea_website
+        varchar(300) rea_logo_url
+        text rea_description
+        jsonb rea_office_hours
+        numeric rea_commission_percentage
+        timestamp rea_created_date
+        varchar(1) rea_record_status
         int id_owner FK
         int id_address FK
     }
     
-    data_restaurant_employee {
-        serial rem_id PK
-        varchar(100) rem_position
-        numeric rem_salary
-        date rem_hire_date
-        timestamp rem_created_date
-        varchar(1) rem_record_status
-        int id_restaurant FK
+    data_agent {
+        serial age_id PK
+        varchar(50) age_license_number
+        varchar(100) age_specialization
+        numeric age_commission_rate
+        date age_hire_date
+        int age_active_listings
+        int age_total_sales
+        int age_total_rentals
+        timestamp age_created_date
+        varchar(1) age_record_status
+        int id_real_estate_agency FK
         int id_person FK
     }
     
-    data_zone {
-        serial zon_id PK
-        varchar(100) zon_name
-        varchar(200) zon_description
-        int zon_capacity
-        timestamp zon_created_date
-        varchar(1) zon_record_status
-        int id_restaurant FK
+    data_property_type {
+        serial pty_id PK
+        varchar(100) pty_name
+        varchar(200) pty_description
+        timestamp pty_created_date
+        varchar(1) pty_record_status
     }
     
-    data_table {
-        serial tab_id PK
-        varchar(20) tab_number
-        int tab_capacity
-        varchar(200) tab_qr_code
-        varchar(20) tab_status
-        timestamp tab_created_date
-        varchar(1) tab_record_status
-        int id_restaurant FK
-        int id_zone FK
+    data_property_status {
+        serial pst_id PK
+        varchar(50) pst_name
+        varchar(200) pst_description
+        timestamp pst_created_date
+        varchar(1) pst_record_status
     }
     
-    data_unit_measure {
-        serial uni_id PK
-        varchar(50) uni_name
-        varchar(10) uni_abbreviation
-        varchar(20) uni_type
-        timestamp uni_created_date
-        varchar(1) uni_record_status
-    }
-    
-    data_supplier {
-        serial sup_id PK
-        varchar(200) sup_name
-        varchar(100) sup_contact_name
-        varchar(13) sup_phone
-        varchar(100) sup_email
-        varchar(13) sup_ruc
-        timestamp sup_created_date
-        varchar(1) sup_record_status
-        int id_restaurant FK
-        int id_address FK
-    }
-    
-    data_ingredient {
-        serial ing_id PK
-        varchar(200) ing_name
-        text ing_description
-        numeric ing_current_stock
-        numeric ing_minimum_stock
-        numeric ing_maximum_stock
-        numeric ing_cost_per_unit
-        timestamp ing_created_date
-        varchar(1) ing_record_status
-        int id_restaurant FK
-        int id_unit_measure FK
-    }
-    
-    data_inventory_movement_type {
-        serial imt_id PK
-        varchar(50) imt_name
-        varchar(200) imt_description
-        varchar(10) imt_operation
-        timestamp imt_created_date
-        varchar(1) imt_record_status
-    }
-    
-    data_inventory_movement {
-        serial inm_id PK
-        numeric inm_quantity
-        numeric inm_unit_cost
-        numeric inm_total_cost
-        text inm_notes
-        timestamp inm_created_date
-        varchar(1) inm_record_status
-        int id_ingredient FK
-        int id_movement_type FK
-        int id_supplier FK
-        int id_employee FK
-    }
-    
-    data_menu_category {
-        serial mca_id PK
-        varchar(200) mca_name
-        text mca_description
-        varchar(300) mca_image_url
-        int mca_sort_order
-        timestamp mca_created_date
-        varchar(1) mca_record_status
-        int id_restaurant FK
-    }
-    
-    data_product {
+    data_property {
         serial pro_id PK
-        varchar(200) pro_name
+        varchar(200) pro_title
         text pro_description
-        numeric pro_price
-        numeric pro_cost
-        int pro_preparation_time
-        varchar(300) pro_image_url
-        boolean pro_is_available
-        int pro_sort_order
+        varchar(50) pro_cadastral_code
+        int pro_year_built
+        numeric pro_total_area
+        numeric pro_built_area
+        numeric pro_land_area
+        int pro_bedrooms
+        numeric pro_bathrooms
+        int pro_parking_spaces
+        int pro_floors
+        numeric pro_sale_price
+        numeric pro_rental_price
+        numeric pro_maintenance_fee
+        numeric pro_property_tax
+        boolean pro_is_furnished
+        boolean pro_allows_pets
+        varchar(300) pro_virtual_tour_url
+        varchar(300) pro_video_url
         timestamp pro_created_date
         varchar(1) pro_record_status
-        int id_restaurant FK
-        int id_menu_category FK
-    }
-    
-    data_recipe {
-        serial rec_id PK
-        numeric rec_quantity_needed
-        timestamp rec_created_date
-        varchar(1) rec_record_status
-        int id_product FK
-        int id_ingredient FK
-    }
-    
-    data_order_type {
-        serial ort_id PK
-        varchar(50) ort_name
-        varchar(200) ort_description
-        timestamp ort_created_date
-        varchar(1) ort_record_status
-    }
-    
-    data_customer {
-        serial cus_id PK
-        varchar(200) cus_name
-        varchar(13) cus_phone
-        varchar(100) cus_email
-        varchar(20) cus_identification
-        timestamp cus_created_date
-        varchar(1) cus_record_status
-        int id_restaurant FK
-        int id_identification_type FK
+        int id_real_estate_agency FK
+        int id_property_type FK
+        int id_property_status FK
         int id_address FK
+        int id_owner FK
+        int id_agent FK
     }
     
-    data_order {
-        serial ord_id PK
-        varchar(50) ord_number
-        varchar(20) ord_status
-        numeric ord_total_amount
-        numeric ord_tax_amount
-        numeric ord_discount_amount
-        text ord_delivery_address
-        numeric ord_delivery_fee
-        text ord_notes
-        int ord_estimated_time
-        timestamp ord_created_date
-        varchar(1) ord_record_status
-        int id_restaurant FK
-        int id_order_type FK
-        int id_customer FK
-        int id_table FK
-        int id_employee FK
+    data_amenity {
+        serial ame_id PK
+        varchar(100) ame_name
+        varchar(50) ame_category
+        varchar(50) ame_icon
+        timestamp ame_created_date
+        varchar(1) ame_record_status
     }
     
-    data_order_item {
-        serial ori_id PK
-        int ori_quantity
-        numeric ori_unit_price
-        numeric ori_total_price
-        text ori_special_instructions
-        timestamp ori_created_date
-        varchar(1) ori_record_status
-        int id_order FK
-        int id_product FK
+    data_property_amenity {
+        serial pam_id PK
+        timestamp pam_created_date
+        varchar(1) pam_record_status
+        int id_property FK
+        int id_amenity FK
     }
     
-    data_document_type {
-        serial dty_id PK
-        varchar(10) dty_code
-        varchar(100) dty_name
-        varchar(200) dty_description
-        timestamp dty_created_date
-        varchar(1) dty_record_status
+    data_property_image {
+        serial pim_id PK
+        varchar(300) pim_url
+        varchar(200) pim_title
+        text pim_description
+        boolean pim_is_main
+        int pim_sort_order
+        timestamp pim_created_date
+        varchar(1) pim_record_status
+        int id_property FK
     }
     
-    data_invoice {
-        serial inv_id PK
-        varchar(50) inv_number
-        varchar(49) inv_access_key
-        timestamp inv_authorization_date
-        numeric inv_subtotal
-        numeric inv_tax_amount
-        numeric inv_total_amount
-        text inv_xml_response
-        varchar(300) inv_pdf_url
-        varchar(20) inv_sri_status
-        timestamp inv_created_date
-        varchar(1) inv_record_status
-        int id_restaurant FK
-        int id_customer FK
-        int id_order FK
-        int id_document_type FK
+    data_client_type {
+        serial clt_id PK
+        varchar(50) clt_name
+        varchar(200) clt_description
+        timestamp clt_created_date
+        varchar(1) clt_record_status
     }
     
-    data_invoice_item {
-        serial ini_id PK
-        varchar(300) ini_description
-        numeric ini_quantity
-        numeric ini_unit_price
-        numeric ini_total_price
-        numeric ini_tax_rate
-        numeric ini_tax_amount
-        timestamp ini_created_date
-        varchar(1) ini_record_status
-        int id_invoice FK
-        int id_product FK
+    data_client {
+        serial cli_id PK
+        numeric cli_budget_min
+        numeric cli_budget_max
+        text cli_preferred_locations
+        text cli_property_requirements
+        date cli_move_in_date
+        boolean cli_financing_approved
+        text cli_notes
+        timestamp cli_created_date
+        varchar(1) cli_record_status
+        int id_real_estate_agency FK
+        int id_person FK
+        int id_client_type FK
+        int id_agent FK
+    }
+    
+    data_lead_source {
+        serial les_id PK
+        varchar(100) les_name
+        varchar(200) les_description
+        timestamp les_created_date
+        varchar(1) les_record_status
+    }
+    
+    data_lead_status {
+        serial lst_id PK
+        varchar(50) lst_name
+        varchar(200) lst_description
+        int lst_sort_order
+        timestamp lst_created_date
+        varchar(1) lst_record_status
+    }
+    
+    data_lead {
+        serial lea_id PK
+        varchar(20) lea_interest_level
+        varchar(50) lea_contact_preference
+        varchar(50) lea_best_time_to_contact
+        text lea_notes
+        timestamp lea_created_date
+        varchar(1) lea_record_status
+        int id_client FK
+        int id_lead_source FK
+        int id_lead_status FK
+        int id_property FK
+    }
+    
+    data_appointment_type {
+        serial apt_id PK
+        varchar(50) apt_name
+        varchar(200) apt_description
+        timestamp apt_created_date
+        varchar(1) apt_record_status
+    }
+    
+    data_appointment {
+        serial app_id PK
+        date app_date
+        time app_time
+        int app_duration
+        text app_notes
+        varchar(20) app_status
+        text app_feedback
+        timestamp app_created_date
+        varchar(1) app_record_status
+        int id_client FK
+        int id_property FK
+        int id_agent FK
+        int id_appointment_type FK
+    }
+    
+    data_contract_type {
+        serial cty_id PK
+        varchar(50) cty_name
+        varchar(200) cty_description
+        timestamp cty_created_date
+        varchar(1) cty_record_status
+    }
+    
+    data_contract {
+        serial con_id PK
+        varchar(50) con_number
+        date con_start_date
+        date con_end_date
+        numeric con_total_amount
+        numeric con_commission_amount
+        numeric con_deposit_amount
+        numeric con_monthly_rent
+        int con_payment_day
+        text con_terms_conditions
+        date con_signed_date
+        varchar(300) con_document_url
+        varchar(20) con_status
+        timestamp con_created_date
+        varchar(1) con_record_status
+        int id_property FK
+        int id_client FK
+        int id_owner FK
+        int id_agent FK
+        int id_contract_type FK
+        int id_real_estate_agency FK
+    }
+    
+    data_payment_concept {
+        serial pco_id PK
+        varchar(100) pco_name
+        varchar(200) pco_description
+        timestamp pco_created_date
+        varchar(1) pco_record_status
     }
     
     data_payment_method {
@@ -408,29 +396,39 @@ erDiagram
     data_payment {
         serial pay_id PK
         numeric pay_amount
+        date pay_due_date
+        date pay_paid_date
         varchar(100) pay_reference
         text pay_notes
+        varchar(20) pay_status
         timestamp pay_created_date
         varchar(1) pay_record_status
-        int id_order FK
+        int id_contract FK
+        int id_payment_concept FK
         int id_payment_method FK
     }
     
-    data_daily_report {
-        serial dre_id PK
-        date dre_date
-        numeric dre_total_sales
-        int dre_total_orders
-        int dre_total_customers
-        numeric dre_average_order_value
-        numeric dre_cash_sales
-        numeric dre_card_sales
-        int dre_delivery_orders
-        int dre_dine_in_orders
-        int dre_takeaway_orders
-        timestamp dre_created_date
-        varchar(1) dre_record_status
-        int id_restaurant FK
+    data_document_type {
+        serial dty_id PK
+        varchar(100) dty_name
+        varchar(200) dty_description
+        timestamp dty_created_date
+        varchar(1) dty_record_status
+    }
+    
+    data_document {
+        serial doc_id PK
+        varchar(200) doc_name
+        varchar(300) doc_file_url
+        int doc_file_size
+        varchar(100) doc_mime_type
+        text doc_notes
+        timestamp doc_created_date
+        varchar(1) doc_record_status
+        int id_document_type FK
+        int id_property FK
+        int id_contract FK
+        int id_client FK
     }
     
     %% Relationships - Core Schema
@@ -453,45 +451,44 @@ erDiagram
     data_address ||--o{ core_city : "in city"
     data_address ||--o{ data_person : "belongs to"
     data_address ||--o{ data_address_type : "has type"
-    data_restaurant ||--o{ core_user : "owned by"
-    data_restaurant ||--o{ data_address : "located at"
-    data_restaurant_employee ||--o{ data_restaurant : "works at"
-    data_restaurant_employee ||--o{ data_person : "is person"
-    data_zone ||--o{ data_restaurant : "belongs to"
-    data_table ||--o{ data_restaurant : "belongs to"
-    data_table ||--o{ data_zone : "in zone"
-    data_supplier ||--o{ data_restaurant : "supplies to"
-    data_supplier ||--o{ data_address : "located at"
-    data_ingredient ||--o{ data_restaurant : "belongs to"
-    data_ingredient ||--o{ data_unit_measure : "measured in"
-    data_inventory_movement ||--o{ data_ingredient : "affects"
-    data_inventory_movement ||--o{ data_inventory_movement_type : "has type"
-    data_inventory_movement ||--o{ data_supplier : "from supplier"
-    data_inventory_movement ||--o{ data_restaurant_employee : "by employee"
-    data_menu_category ||--o{ data_restaurant : "belongs to"
-    data_product ||--o{ data_restaurant : "belongs to"
-    data_product ||--o{ data_menu_category : "in category"
-    data_recipe ||--o{ data_product : "for product"
-    data_recipe ||--o{ data_ingredient : "uses ingredient"
-    data_customer ||--o{ data_restaurant : "customer of"
-    data_customer ||--o{ core_identification_type : "has type"
-    data_customer ||--o{ data_address : "lives at"
-    data_order ||--o{ data_restaurant : "placed at"
-    data_order ||--o{ data_order_type : "has type"
-    data_order ||--o{ data_customer : "placed by"
-    data_order ||--o{ data_table : "for table"
-    data_order ||--o{ data_restaurant_employee : "attended by"
-    data_order_item ||--o{ data_order : "belongs to"
-    data_order_item ||--o{ data_product : "is product"
-    data_invoice ||--o{ data_restaurant : "from restaurant"
-    data_invoice ||--o{ data_customer : "for customer"
-    data_invoice ||--o{ data_order : "for order"
-    data_invoice ||--o{ data_document_type : "has type"
-    data_invoice_item ||--o{ data_invoice : "belongs to"
-    data_invoice_item ||--o{ data_product : "is product"
-    data_payment ||--o{ data_order : "for order"
+    data_real_estate_agency ||--o{ core_user : "owned by"
+    data_real_estate_agency ||--o{ data_address : "located at"
+    data_agent ||--o{ data_real_estate_agency : "works at"
+    data_agent ||--o{ data_person : "is person"
+    data_property ||--o{ data_real_estate_agency : "listed by"
+    data_property ||--o{ data_property_type : "has type"
+    data_property ||--o{ data_property_status : "has status"
+    data_property ||--o{ data_address : "located at"
+    data_property ||--o{ data_person : "owned by"
+    data_property ||--o{ data_agent : "managed by"
+    data_property_amenity ||--o{ data_property : "belongs to"
+    data_property_amenity ||--o{ data_amenity : "has amenity"
+    data_property_image ||--o{ data_property : "belongs to"
+    data_client ||--o{ data_real_estate_agency : "client of"
+    data_client ||--o{ data_person : "is person"
+    data_client ||--o{ data_client_type : "has type"
+    data_client ||--o{ data_agent : "assigned to"
+    data_lead ||--o{ data_client : "for client"
+    data_lead ||--o{ data_lead_source : "from source"
+    data_lead ||--o{ data_lead_status : "has status"
+    data_lead ||--o{ data_property : "interested in"
+    data_appointment ||--o{ data_client : "with client"
+    data_appointment ||--o{ data_property : "for property"
+    data_appointment ||--o{ data_agent : "with agent"
+    data_appointment ||--o{ data_appointment_type : "has type"
+    data_contract ||--o{ data_property : "for property"
+    data_contract ||--o{ data_client : "with client"
+    data_contract ||--o{ data_person : "property owner"
+    data_contract ||--o{ data_agent : "by agent"
+    data_contract ||--o{ data_contract_type : "has type"
+    data_contract ||--o{ data_real_estate_agency : "from agency"
+    data_payment ||--o{ data_contract : "for contract"
+    data_payment ||--o{ data_payment_concept : "has concept"
     data_payment ||--o{ data_payment_method : "using method"
-    data_daily_report ||--o{ data_restaurant : "for restaurant"
+    data_document ||--o{ data_document_type : "has type"
+    data_document ||--o{ data_property : "for property"
+    data_document ||--o{ data_contract : "for contract"
+    data_document ||--o{ data_client : "for client"
 ```
 
 ## Resumen de la Base de Datos
@@ -501,14 +498,24 @@ erDiagram
 - **Usuarios y Autenticación**: core_user, core_role, core_user_role, core_sessions
 - **Tipos de Datos Maestros**: core_genre, core_identification_type, core_phone_type, core_notification_type
 
-### Data Schema (26 tablas)
+### Data Schema (24 tablas)
 - **Personas y Contactos**: data_person, data_phone, data_address, data_address_type
-- **Restaurante**: data_restaurant, data_restaurant_employee, data_zone, data_table
-- **Inventario**: data_unit_measure, data_supplier, data_ingredient, data_inventory_movement_type, data_inventory_movement
-- **Menú**: data_menu_category, data_product, data_recipe
-- **Pedidos**: data_order_type, data_customer, data_order, data_order_item
-- **Facturación**: data_document_type, data_invoice, data_invoice_item
-- **Pagos**: data_payment_method, data_payment
-- **Reportes**: data_daily_report
+- **Agencia Inmobiliaria**: data_real_estate_agency, data_agent
+- **Propiedades**: data_property_type, data_property_status, data_property, data_amenity, data_property_amenity, data_property_image
+- **Clientes y Leads**: data_client_type, data_client, data_lead_source, data_lead_status, data_lead
+- **Citas**: data_appointment_type, data_appointment
+- **Contratos**: data_contract_type, data_contract
+- **Pagos**: data_payment_concept, data_payment_method, data_payment
+- **Documentos**: data_document_type, data_document
 
-**Total: 37 tablas**
+**Total: 35 tablas**
+
+## Principales Cambios del Sistema de Restaurantes a Inmobiliaria
+
+1. **Gestión Multi-tenant**: Cambio de restaurantes a agencias inmobiliarias
+2. **Productos**: Cambio de menú/platos a propiedades con múltiples características
+3. **Inventario**: Eliminado completamente, reemplazado por gestión de propiedades
+4. **Clientes**: Sistema más complejo con leads, presupuestos y requerimientos
+5. **Transacciones**: De pedidos simples a contratos complejos de venta/alquiler
+6. **Pagos**: Sistema adaptado para manejar alquileres mensuales, depósitos y comisiones
+7. **Documentación**: Sistema robusto para manejar escrituras, planos y permisos

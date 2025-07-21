@@ -96,385 +96,356 @@ create index idx_data_address_type on data.data_address (id_address_type);
 create index idx_data_address_location on data.data_address (id_country, id_province, id_city);
 
 -- ================================================
--- 1. GESTIÓN DE RESTAURANTES (Multi-tenant)
+-- 1. GESTIÓN DE AGENCIAS INMOBILIARIAS (Multi-tenant)
 -- ================================================
 create table
-  data.data_restaurant (
-    res_id serial primary key,
-    res_name varchar(200) not null,
-    res_business_name varchar(200) not null,
-    res_ruc varchar(13) not null unique,
-    res_email varchar(100) not null,
-    res_phone varchar(13),
-    res_website varchar(200),
-    res_logo_url varchar(300),
-    res_description text,
-    res_opening_hours jsonb, -- {"monday": "08:00-22:00", "tuesday": "08:00-22:00", ...}
-    res_tax_percentage numeric(5, 2) default 12.00,
-    res_created_date timestamp default current_timestamp,
-    res_record_status varchar(1) not null default '0',
+  data.data_real_estate_agency (
+    rea_id serial primary key,
+    rea_name varchar(200) not null,
+    rea_business_name varchar(200) not null,
+    rea_ruc varchar(13) not null unique,
+    rea_email varchar(100) not null,
+    rea_phone varchar(13),
+    rea_website varchar(200),
+    rea_logo_url varchar(300),
+    rea_description text,
+    rea_office_hours jsonb, -- {"monday": "08:00-18:00", "tuesday": "08:00-18:00", ...}
+    rea_commission_percentage numeric(5, 2) default 3.00,
+    rea_created_date timestamp default current_timestamp,
+    rea_record_status varchar(1) not null default '0',
     id_owner int not null,
     id_address int not null,
-    constraint fk1_data_restaurant foreign key (id_owner) references core.core_user (use_id),
-    constraint fk2_data_restaurant foreign key (id_address) references data.data_address (add_id)
+    constraint fk1_data_real_estate_agency foreign key (id_owner) references core.core_user (use_id),
+    constraint fk2_data_real_estate_agency foreign key (id_address) references data.data_address (add_id)
   );
 
-create index idx_restaurant_ruc on data.data_restaurant (res_ruc);
+create index idx_real_estate_agency_ruc on data.data_real_estate_agency (rea_ruc);
 
-create index idx_restaurant_owner on data.data_restaurant (id_owner);
+create index idx_real_estate_agency_owner on data.data_real_estate_agency (id_owner);
 
 create table
-  data.data_restaurant_employee (
-    rem_id serial primary key,
-    rem_position varchar(100) not null,
-    rem_salary numeric(10, 2),
-    rem_hire_date date not null,
-    rem_created_date timestamp default current_timestamp,
-    rem_record_status varchar(1) not null default '0',
-    id_restaurant int not null,
+  data.data_agent (
+    age_id serial primary key,
+    age_license_number varchar(50) not null,
+    age_specialization varchar(100), -- residential, commercial, luxury, rentals
+    age_commission_rate numeric(5, 2),
+    age_hire_date date not null,
+    age_active_listings int default 0,
+    age_total_sales int default 0,
+    age_total_rentals int default 0,
+    age_created_date timestamp default current_timestamp,
+    age_record_status varchar(1) not null default '0',
+    id_real_estate_agency int not null,
     id_person int not null,
-    constraint fk1_data_restaurant_employee foreign key (id_restaurant) references data.data_restaurant (res_id),
-    constraint fk2_data_restaurant_employee foreign key (id_person) references data.data_person (per_id),
-    constraint uk1_data_restaurant_employee unique (id_restaurant, id_person)
+    constraint fk1_data_agent foreign key (id_real_estate_agency) references data.data_real_estate_agency (rea_id),
+    constraint fk2_data_agent foreign key (id_person) references data.data_person (per_id),
+    constraint uk1_data_agent unique (id_real_estate_agency, id_person)
   );
 
-create index idx_restaurant_employee_restaurant on data.data_restaurant_employee (id_restaurant);
+create index idx_agent_agency on data.data_agent (id_real_estate_agency);
 
--- 2. GESTIÓN DE MESAS Y ZONAS
+create index idx_agent_license on data.data_agent (age_license_number);
+
+-- 2. GESTIÓN DE PROPIEDADES
 -- ================================================
 create table
-  data.data_zone (
-    zon_id serial primary key,
-    zon_name varchar(100) not null,
-    zon_description varchar(200),
-    zon_capacity int not null default 0,
-    zon_created_date timestamp default current_timestamp,
-    zon_record_status varchar(1) not null default '0',
-    id_restaurant int not null,
-    constraint fk1_data_zone foreign key (id_restaurant) references data.data_restaurant (res_id)
-  );
-
-create index idx_zone_restaurant on data.data_zone (id_restaurant);
-
-create table
-  data.data_table (
-    tab_id serial primary key,
-    tab_number varchar(20) not null,
-    tab_capacity int not null,
-    tab_qr_code varchar(200),
-    tab_status varchar(20) not null default 'available', -- available, occupied, reserved, maintenance
-    tab_created_date timestamp default current_timestamp,
-    tab_record_status varchar(1) not null default '0',
-    id_restaurant int not null,
-    id_zone int not null,
-    constraint fk1_data_table foreign key (id_restaurant) references data.data_restaurant (res_id),
-    constraint fk2_data_table foreign key (id_zone) references data.data_zone (zon_id),
-    constraint uk1_data_table unique (id_restaurant, tab_number)
-  );
-
-create index idx_table_restaurant on data.data_table (id_restaurant);
-
-create index idx_table_zone on data.data_table (id_zone);
-
-create index idx_table_status on data.data_table (tab_status);
-
--- 3. INVENTARIO INTELIGENTE
--- ================================================
-create table
-  data.data_unit_measure (
-    uni_id serial primary key,
-    uni_name varchar(50) not null,
-    uni_abbreviation varchar(10) not null,
-    uni_type varchar(20) not null, -- weight, volume, quantity
-    uni_created_date timestamp default current_timestamp,
-    uni_record_status varchar(1) not null default '0'
+  data.data_property_type (
+    pty_id serial primary key,
+    pty_name varchar(100) not null, -- casa, departamento, terreno, local comercial, oficina
+    pty_description varchar(200),
+    pty_created_date timestamp default current_timestamp,
+    pty_record_status varchar(1) not null default '0'
   );
 
 create table
-  data.data_supplier (
-    sup_id serial primary key,
-    sup_name varchar(200) not null,
-    sup_contact_name varchar(100),
-    sup_phone varchar(13),
-    sup_email varchar(100),
-    sup_ruc varchar(13),
-    sup_created_date timestamp default current_timestamp,
-    sup_record_status varchar(1) not null default '0',
-    id_restaurant int not null,
-    id_address int,
-    constraint fk1_data_supplier foreign key (id_restaurant) references data.data_restaurant (res_id),
-    constraint fk2_data_supplier foreign key (id_address) references data.data_address (add_id)
-  );
-
-create index idx_supplier_restaurant on data.data_supplier (id_restaurant);
-
-create table
-  data.data_ingredient (
-    ing_id serial primary key,
-    ing_name varchar(200) not null,
-    ing_description text,
-    ing_current_stock numeric(10, 4) not null default 0,
-    ing_minimum_stock numeric(10, 4) not null default 0,
-    ing_maximum_stock numeric(10, 4),
-    ing_cost_per_unit numeric(10, 4) not null default 0,
-    ing_created_date timestamp default current_timestamp,
-    ing_record_status varchar(1) not null default '0',
-    id_restaurant int not null,
-    id_unit_measure int not null,
-    constraint fk1_data_ingredient foreign key (id_restaurant) references data.data_restaurant (res_id),
-    constraint fk2_data_ingredient foreign key (id_unit_measure) references data.data_unit_measure (uni_id)
-  );
-
-create index idx_ingredient_restaurant on data.data_ingredient (id_restaurant);
-
-create index idx_ingredient_stock on data.data_ingredient (ing_current_stock);
-
-create table
-  data.data_inventory_movement_type (
-    imt_id serial primary key,
-    imt_name varchar(50) not null,
-    imt_description varchar(200),
-    imt_operation varchar(10) not null, -- add, subtract
-    imt_created_date timestamp default current_timestamp,
-    imt_record_status varchar(1) not null default '0'
+  data.data_property_status (
+    pst_id serial primary key,
+    pst_name varchar(50) not null, -- disponible, reservado, vendido, alquilado, en_mantenimiento
+    pst_description varchar(200),
+    pst_created_date timestamp default current_timestamp,
+    pst_record_status varchar(1) not null default '0'
   );
 
 create table
-  data.data_inventory_movement (
-    inm_id serial primary key,
-    inm_quantity numeric(10, 4) not null,
-    inm_unit_cost numeric(10, 4),
-    inm_total_cost numeric(10, 4),
-    inm_notes text,
-    inm_created_date timestamp default current_timestamp,
-    inm_record_status varchar(1) not null default '0',
-    id_ingredient int not null,
-    id_movement_type int not null,
-    id_supplier int,
-    id_employee int,
-    constraint fk1_data_inventory_movement foreign key (id_ingredient) references data.data_ingredient (ing_id),
-    constraint fk2_data_inventory_movement foreign key (id_movement_type) references data.data_inventory_movement_type (imt_id),
-    constraint fk3_data_inventory_movement foreign key (id_supplier) references data.data_supplier (sup_id),
-    constraint fk4_data_inventory_movement foreign key (id_employee) references data.data_restaurant_employee (rem_id)
-  );
-
-create index idx_inventory_movement_ingredient on data.data_inventory_movement (id_ingredient);
-
-create index idx_inventory_movement_date on data.data_inventory_movement (inm_created_date);
-
--- 4. MENÚ Y PRODUCTOS
--- ================================================
-create table
-  data.data_menu_category (
-    mca_id serial primary key,
-    mca_name varchar(200) not null,
-    mca_description text,
-    mca_image_url varchar(300),
-    mca_sort_order int default 0,
-    mca_created_date timestamp default current_timestamp,
-    mca_record_status varchar(1) not null default '0',
-    id_restaurant int not null,
-    constraint fk1_data_menu_category foreign key (id_restaurant) references data.data_restaurant (res_id)
-  );
-
-create index idx_menu_category_restaurant on data.data_menu_category (id_restaurant);
-
-create table
-  data.data_product (
+  data.data_property (
     pro_id serial primary key,
-    pro_name varchar(200) not null,
+    pro_title varchar(200) not null,
     pro_description text,
-    pro_price numeric(10, 4) not null,
-    pro_cost numeric(10, 4) not null default 0,
-    pro_preparation_time int default 0, -- minutes
-    pro_image_url varchar(300),
-    pro_is_available boolean default true,
-    pro_sort_order int default 0,
+    pro_cadastral_code varchar(50),
+    pro_year_built int,
+    pro_total_area numeric(10, 2), -- metros cuadrados
+    pro_built_area numeric(10, 2), -- metros cuadrados
+    pro_land_area numeric(10, 2), -- metros cuadrados
+    pro_bedrooms int,
+    pro_bathrooms numeric(3, 1), -- permite medios baños
+    pro_parking_spaces int default 0,
+    pro_floors int default 1,
+    pro_sale_price numeric(12, 2),
+    pro_rental_price numeric(10, 2),
+    pro_maintenance_fee numeric(10, 2),
+    pro_property_tax numeric(10, 2),
+    pro_is_furnished boolean default false,
+    pro_allows_pets boolean default false,
+    pro_virtual_tour_url varchar(300),
+    pro_video_url varchar(300),
     pro_created_date timestamp default current_timestamp,
     pro_record_status varchar(1) not null default '0',
-    id_restaurant int not null,
-    id_menu_category int not null,
-    constraint fk1_data_product foreign key (id_restaurant) references data.data_restaurant (res_id),
-    constraint fk2_data_product foreign key (id_menu_category) references data.data_menu_category (mca_id)
+    id_real_estate_agency int not null,
+    id_property_type int not null,
+    id_property_status int not null,
+    id_address int not null,
+    id_owner int, -- propietario actual
+    id_agent int, -- agente asignado
+    constraint fk1_data_property foreign key (id_real_estate_agency) references data.data_real_estate_agency (rea_id),
+    constraint fk2_data_property foreign key (id_property_type) references data.data_property_type (pty_id),
+    constraint fk3_data_property foreign key (id_property_status) references data.data_property_status (pst_id),
+    constraint fk4_data_property foreign key (id_address) references data.data_address (add_id),
+    constraint fk5_data_property foreign key (id_owner) references data.data_person (per_id),
+    constraint fk6_data_property foreign key (id_agent) references data.data_agent (age_id)
   );
 
-create index idx_product_restaurant on data.data_product (id_restaurant);
+create index idx_property_agency on data.data_property (id_real_estate_agency);
 
-create index idx_product_category on data.data_product (id_menu_category);
+create index idx_property_type on data.data_property (id_property_type);
 
-create index idx_product_available on data.data_product (pro_is_available);
+create index idx_property_status on data.data_property (id_property_status);
 
-create table
-  data.data_recipe (
-    rec_id serial primary key,
-    rec_quantity_needed numeric(10, 4) not null,
-    rec_created_date timestamp default current_timestamp,
-    rec_record_status varchar(1) not null default '0',
-    id_product int not null,
-    id_ingredient int not null,
-    constraint fk1_data_recipe foreign key (id_product) references data.data_product (pro_id),
-    constraint fk2_data_recipe foreign key (id_ingredient) references data.data_ingredient (ing_id),
-    constraint uk1_data_recipe unique (id_product, id_ingredient)
-  );
+create index idx_property_agent on data.data_property (id_agent);
 
-create index idx_recipe_product on data.data_recipe (id_product);
+create index idx_property_price_range on data.data_property (pro_sale_price, pro_rental_price);
 
-create index idx_recipe_ingredient on data.data_recipe (id_ingredient);
-
--- 5. GESTIÓN DE PEDIDOS
+-- 3. CARACTERÍSTICAS Y SERVICIOS DE PROPIEDADES
 -- ================================================
 create table
-  data.data_order_type (
-    ort_id serial primary key,
-    ort_name varchar(50) not null,
-    ort_description varchar(200),
-    ort_created_date timestamp default current_timestamp,
-    ort_record_status varchar(1) not null default '0'
+  data.data_amenity (
+    ame_id serial primary key,
+    ame_name varchar(100) not null, -- piscina, gimnasio, seguridad 24h, etc
+    ame_category varchar(50), -- seguridad, recreación, servicios
+    ame_icon varchar(50),
+    ame_created_date timestamp default current_timestamp,
+    ame_record_status varchar(1) not null default '0'
   );
 
 create table
-  data.data_customer (
-    cus_id serial primary key,
-    cus_name varchar(200) not null,
-    cus_phone varchar(13),
-    cus_email varchar(100),
-    cus_identification varchar(20),
-    cus_created_date timestamp default current_timestamp,
-    cus_record_status varchar(1) not null default '0',
-    id_restaurant int not null,
-    id_identification_type int,
-    id_address int,
-    constraint fk1_data_customer foreign key (id_restaurant) references data.data_restaurant (res_id),
-    constraint fk2_data_customer foreign key (id_identification_type) references core.core_identification_type (ity_id),
-    constraint fk3_data_customer foreign key (id_address) references data.data_address (add_id)
+  data.data_property_amenity (
+    pam_id serial primary key,
+    pam_created_date timestamp default current_timestamp,
+    pam_record_status varchar(1) not null default '0',
+    id_property int not null,
+    id_amenity int not null,
+    constraint fk1_data_property_amenity foreign key (id_property) references data.data_property (pro_id),
+    constraint fk2_data_property_amenity foreign key (id_amenity) references data.data_amenity (ame_id),
+    constraint uk1_data_property_amenity unique (id_property, id_amenity)
   );
 
-create index idx_customer_restaurant on data.data_customer (id_restaurant);
+create index idx_property_amenity_property on data.data_property_amenity (id_property);
 
-create index idx_customer_phone on data.data_customer (cus_phone);
+create index idx_property_amenity_amenity on data.data_property_amenity (id_amenity);
 
 create table
-  data.data_order (
-    ord_id serial primary key,
-    ord_number varchar(50) not null,
-    ord_status varchar(20) not null default 'pending', -- pending, preparing, ready, delivered, cancelled
-    ord_total_amount numeric(10, 4) not null default 0,
-    ord_tax_amount numeric(10, 4) not null default 0,
-    ord_discount_amount numeric(10, 4) not null default 0,
-    ord_delivery_address text,
-    ord_delivery_fee numeric(10, 4) default 0,
-    ord_notes text,
-    ord_estimated_time int, -- minutes
-    ord_created_date timestamp default current_timestamp,
-    ord_record_status varchar(1) not null default '0',
-    id_restaurant int not null,
-    id_order_type int not null,
-    id_customer int,
-    id_table int,
-    id_employee int,
-    constraint fk1_data_order foreign key (id_restaurant) references data.data_restaurant (res_id),
-    constraint fk2_data_order foreign key (id_order_type) references data.data_order_type (ort_id),
-    constraint fk3_data_order foreign key (id_customer) references data.data_customer (cus_id),
-    constraint fk4_data_order foreign key (id_table) references data.data_table (tab_id),
-    constraint fk5_data_order foreign key (id_employee) references data.data_restaurant_employee (rem_id),
-    constraint uk1_data_order unique (id_restaurant, ord_number)
+  data.data_property_image (
+    pim_id serial primary key,
+    pim_url varchar(300) not null,
+    pim_title varchar(200),
+    pim_description text,
+    pim_is_main boolean default false,
+    pim_sort_order int default 0,
+    pim_created_date timestamp default current_timestamp,
+    pim_record_status varchar(1) not null default '0',
+    id_property int not null,
+    constraint fk1_data_property_image foreign key (id_property) references data.data_property (pro_id)
   );
 
-create index idx_order_restaurant on data.data_order (id_restaurant);
+create index idx_property_image_property on data.data_property_image (id_property);
 
-create index idx_order_status on data.data_order (ord_status);
-
-create index idx_order_date on data.data_order (ord_created_date);
-
-create index idx_order_customer on data.data_order (id_customer);
-
-create table
-  data.data_order_item (
-    ori_id serial primary key,
-    ori_quantity int not null,
-    ori_unit_price numeric(10, 4) not null,
-    ori_total_price numeric(10, 4) not null,
-    ori_special_instructions text,
-    ori_created_date timestamp default current_timestamp,
-    ori_record_status varchar(1) not null default '0',
-    id_order int not null,
-    id_product int not null,
-    constraint fk1_data_order_item foreign key (id_order) references data.data_order (ord_id),
-    constraint fk2_data_order_item foreign key (id_product) references data.data_product (pro_id)
-  );
-
-create index idx_order_item_order on data.data_order_item (id_order);
-
-create index idx_order_item_product on data.data_order_item (id_product);
-
--- 6. FACTURACIÓN ELECTRÓNICA SRI
+-- 4. GESTIÓN DE CLIENTES Y LEADS
 -- ================================================
 create table
-  data.data_document_type (
-    dty_id serial primary key,
-    dty_code varchar(10) not null,
-    dty_name varchar(100) not null,
-    dty_description varchar(200),
-    dty_created_date timestamp default current_timestamp,
-    dty_record_status varchar(1) not null default '0'
+  data.data_client_type (
+    clt_id serial primary key,
+    clt_name varchar(50) not null, -- comprador, vendedor, arrendador, arrendatario
+    clt_description varchar(200),
+    clt_created_date timestamp default current_timestamp,
+    clt_record_status varchar(1) not null default '0'
   );
 
 create table
-  data.data_invoice (
-    inv_id serial primary key,
-    inv_number varchar(50) not null,
-    inv_access_key varchar(49), -- Clave de acceso SRI
-    inv_authorization_date timestamp,
-    inv_subtotal numeric(10, 4) not null,
-    inv_tax_amount numeric(10, 4) not null,
-    inv_total_amount numeric(10, 4) not null,
-    inv_xml_response text,
-    inv_pdf_url varchar(300),
-    inv_sri_status varchar(20) default 'pending', -- pending, authorized, rejected
-    inv_created_date timestamp default current_timestamp,
-    inv_record_status varchar(1) not null default '0',
-    id_restaurant int not null,
-    id_customer int not null,
-    id_order int,
-    id_document_type int not null,
-    constraint fk1_data_invoice foreign key (id_restaurant) references data.data_restaurant (res_id),
-    constraint fk2_data_invoice foreign key (id_customer) references data.data_customer (cus_id),
-    constraint fk3_data_invoice foreign key (id_order) references data.data_order (ord_id),
-    constraint fk4_data_invoice foreign key (id_document_type) references data.data_document_type (dty_id),
-    constraint uk1_data_invoice unique (id_restaurant, inv_number)
+  data.data_client (
+    cli_id serial primary key,
+    cli_budget_min numeric(12, 2),
+    cli_budget_max numeric(12, 2),
+    cli_preferred_locations text, -- JSON array de zonas preferidas
+    cli_property_requirements text, -- JSON con requerimientos específicos
+    cli_move_in_date date,
+    cli_financing_approved boolean default false,
+    cli_notes text,
+    cli_created_date timestamp default current_timestamp,
+    cli_record_status varchar(1) not null default '0',
+    id_real_estate_agency int not null,
+    id_person int not null,
+    id_client_type int not null,
+    id_agent int,
+    constraint fk1_data_client foreign key (id_real_estate_agency) references data.data_real_estate_agency (rea_id),
+    constraint fk2_data_client foreign key (id_person) references data.data_person (per_id),
+    constraint fk3_data_client foreign key (id_client_type) references data.data_client_type (clt_id),
+    constraint fk4_data_client foreign key (id_agent) references data.data_agent (age_id)
   );
 
-create index idx_invoice_restaurant on data.data_invoice (id_restaurant);
+create index idx_client_agency on data.data_client (id_real_estate_agency);
 
-create index idx_invoice_customer on data.data_invoice (id_customer);
+create index idx_client_person on data.data_client (id_person);
 
-create index idx_invoice_access_key on data.data_invoice (inv_access_key);
+create index idx_client_agent on data.data_client (id_agent);
 
-create index idx_invoice_sri_status on data.data_invoice (inv_sri_status);
-
-create index idx_invoice_date on data.data_invoice (inv_created_date);
+create index idx_client_budget on data.data_client (cli_budget_min, cli_budget_max);
 
 create table
-  data.data_invoice_item (
-    ini_id serial primary key,
-    ini_description varchar(300) not null,
-    ini_quantity numeric(10, 4) not null,
-    ini_unit_price numeric(10, 4) not null,
-    ini_total_price numeric(10, 4) not null,
-    ini_tax_rate numeric(5, 2) not null default 12.00,
-    ini_tax_amount numeric(10, 4) not null,
-    ini_created_date timestamp default current_timestamp,
-    ini_record_status varchar(1) not null default '0',
-    id_invoice int not null,
-    id_product int,
-    constraint fk1_data_invoice_item foreign key (id_invoice) references data.data_invoice (inv_id),
-    constraint fk2_data_invoice_item foreign key (id_product) references data.data_product (pro_id)
+  data.data_lead_source (
+    les_id serial primary key,
+    les_name varchar(100) not null, -- web, referido, walk-in, publicidad
+    les_description varchar(200),
+    les_created_date timestamp default current_timestamp,
+    les_record_status varchar(1) not null default '0'
   );
 
-create index idx_invoice_item_invoice on data.data_invoice_item (id_invoice);
+create table
+  data.data_lead_status (
+    lst_id serial primary key,
+    lst_name varchar(50) not null, -- nuevo, contactado, calificado, negociando, cerrado, perdido
+    lst_description varchar(200),
+    lst_sort_order int default 0,
+    lst_created_date timestamp default current_timestamp,
+    lst_record_status varchar(1) not null default '0'
+  );
 
--- 7. PAGOS Y REPORTES
+create table
+  data.data_lead (
+    lea_id serial primary key,
+    lea_interest_level varchar(20), -- alto, medio, bajo
+    lea_contact_preference varchar(50), -- email, phone, whatsapp
+    lea_best_time_to_contact varchar(50),
+    lea_notes text,
+    lea_created_date timestamp default current_timestamp,
+    lea_record_status varchar(1) not null default '0',
+    id_client int not null,
+    id_lead_source int not null,
+    id_lead_status int not null,
+    id_property int, -- propiedad de interés inicial
+    constraint fk1_data_lead foreign key (id_client) references data.data_client (cli_id),
+    constraint fk2_data_lead foreign key (id_lead_source) references data.data_lead_source (les_id),
+    constraint fk3_data_lead foreign key (id_lead_status) references data.data_lead_status (lst_id),
+    constraint fk4_data_lead foreign key (id_property) references data.data_property (pro_id)
+  );
+
+create index idx_lead_client on data.data_lead (id_client);
+
+create index idx_lead_status on data.data_lead (id_lead_status);
+
+create index idx_lead_property on data.data_lead (id_property);
+
+-- 5. VISITAS Y SEGUIMIENTO
 -- ================================================
+create table
+  data.data_appointment_type (
+    apt_id serial primary key,
+    apt_name varchar(50) not null, -- visita_presencial, visita_virtual, reunión, firma_contrato
+    apt_description varchar(200),
+    apt_created_date timestamp default current_timestamp,
+    apt_record_status varchar(1) not null default '0'
+  );
+
+create table
+  data.data_appointment (
+    app_id serial primary key,
+    app_date date not null,
+    app_time time not null,
+    app_duration int default 60, -- minutos
+    app_notes text,
+    app_status varchar(20) default 'scheduled', -- scheduled, completed, cancelled, no_show
+    app_feedback text,
+    app_created_date timestamp default current_timestamp,
+    app_record_status varchar(1) not null default '0',
+    id_client int not null,
+    id_property int not null,
+    id_agent int not null,
+    id_appointment_type int not null,
+    constraint fk1_data_appointment foreign key (id_client) references data.data_client (cli_id),
+    constraint fk2_data_appointment foreign key (id_property) references data.data_property (pro_id),
+    constraint fk3_data_appointment foreign key (id_agent) references data.data_agent (age_id),
+    constraint fk4_data_appointment foreign key (id_appointment_type) references data.data_appointment_type (apt_id)
+  );
+
+create index idx_appointment_client on data.data_appointment (id_client);
+
+create index idx_appointment_property on data.data_appointment (id_property);
+
+create index idx_appointment_agent on data.data_appointment (id_agent);
+
+create index idx_appointment_date on data.data_appointment (app_date);
+
+-- 6. CONTRATOS Y TRANSACCIONES
+-- ================================================
+create table
+  data.data_contract_type (
+    cty_id serial primary key,
+    cty_name varchar(50) not null, -- venta, alquiler, administración
+    cty_description varchar(200),
+    cty_created_date timestamp default current_timestamp,
+    cty_record_status varchar(1) not null default '0'
+  );
+
+create table
+  data.data_contract (
+    con_id serial primary key,
+    con_number varchar(50) not null,
+    con_start_date date not null,
+    con_end_date date,
+    con_total_amount numeric(12, 2) not null,
+    con_commission_amount numeric(10, 2),
+    con_deposit_amount numeric(10, 2),
+    con_monthly_rent numeric(10, 2), -- para alquileres
+    con_payment_day int, -- día del mes para pagos de alquiler
+    con_terms_conditions text,
+    con_signed_date date,
+    con_document_url varchar(300),
+    con_status varchar(20) default 'draft', -- draft, active, completed, cancelled
+    con_created_date timestamp default current_timestamp,
+    con_record_status varchar(1) not null default '0',
+    id_property int not null,
+    id_client int not null,
+    id_owner int not null, -- propietario
+    id_agent int not null,
+    id_contract_type int not null,
+    id_real_estate_agency int not null,
+    constraint fk1_data_contract foreign key (id_property) references data.data_property (pro_id),
+    constraint fk2_data_contract foreign key (id_client) references data.data_client (cli_id),
+    constraint fk3_data_contract foreign key (id_owner) references data.data_person (per_id),
+    constraint fk4_data_contract foreign key (id_agent) references data.data_agent (age_id),
+    constraint fk5_data_contract foreign key (id_contract_type) references data.data_contract_type (cty_id),
+    constraint fk6_data_contract foreign key (id_real_estate_agency) references data.data_real_estate_agency (rea_id)
+  );
+
+create index idx_contract_property on data.data_contract (id_property);
+
+create index idx_contract_client on data.data_contract (id_client);
+
+create index idx_contract_agent on data.data_contract (id_agent);
+
+create index idx_contract_status on data.data_contract (con_status);
+
+create index idx_contract_dates on data.data_contract (con_start_date, con_end_date);
+
+-- 7. PAGOS Y FACTURACIÓN
+-- ================================================
+create table
+  data.data_payment_concept (
+    pco_id serial primary key,
+    pco_name varchar(100) not null, -- alquiler, depósito, comisión, mantenimiento
+    pco_description varchar(200),
+    pco_created_date timestamp default current_timestamp,
+    pco_record_status varchar(1) not null default '0'
+  );
+
 create table
   data.data_payment_method (
     pam_id serial primary key,
@@ -488,43 +459,63 @@ create table
 create table
   data.data_payment (
     pay_id serial primary key,
-    pay_amount numeric(10, 4) not null,
+    pay_amount numeric(10, 2) not null,
+    pay_due_date date,
+    pay_paid_date date,
     pay_reference varchar(100),
     pay_notes text,
+    pay_status varchar(20) default 'pending', -- pending, paid, overdue, cancelled
     pay_created_date timestamp default current_timestamp,
     pay_record_status varchar(1) not null default '0',
-    id_order int not null,
-    id_payment_method int not null,
-    constraint fk1_data_payment foreign key (id_order) references data.data_order (ord_id),
-    constraint fk2_data_payment foreign key (id_payment_method) references data.data_payment_method (pam_id)
+    id_contract int not null,
+    id_payment_concept int not null,
+    id_payment_method int,
+    constraint fk1_data_payment foreign key (id_contract) references data.data_contract (con_id),
+    constraint fk2_data_payment foreign key (id_payment_concept) references data.data_payment_concept (pco_id),
+    constraint fk3_data_payment foreign key (id_payment_method) references data.data_payment_method (pam_id)
   );
 
-create index idx_payment_order on data.data_payment (id_order);
+create index idx_payment_contract on data.data_payment (id_contract);
 
-create index idx_payment_method on data.data_payment (id_payment_method);
+create index idx_payment_status on data.data_payment (pay_status);
 
-create index idx_payment_date on data.data_payment (pay_created_date);
+create index idx_payment_dates on data.data_payment (pay_due_date, pay_paid_date);
+
+-- 8. DOCUMENTOS Y REPORTES
+-- ================================================
+create table
+  data.data_document_type (
+    dty_id serial primary key,
+    dty_name varchar(100) not null, -- escritura, planos, permisos, facturas
+    dty_description varchar(200),
+    dty_created_date timestamp default current_timestamp,
+    dty_record_status varchar(1) not null default '0'
+  );
 
 create table
-  data.data_daily_report (
-    dre_id serial primary key,
-    dre_date date not null,
-    dre_total_sales numeric(10, 4) not null default 0,
-    dre_total_orders int not null default 0,
-    dre_total_customers int not null default 0,
-    dre_average_order_value numeric(10, 4) not null default 0,
-    dre_cash_sales numeric(10, 4) not null default 0,
-    dre_card_sales numeric(10, 4) not null default 0,
-    dre_delivery_orders int not null default 0,
-    dre_dine_in_orders int not null default 0,
-    dre_takeaway_orders int not null default 0,
-    dre_created_date timestamp default current_timestamp,
-    dre_record_status varchar(1) not null default '0',
-    id_restaurant int not null,
-    constraint fk1_data_daily_report foreign key (id_restaurant) references data.data_restaurant (res_id),
-    constraint uk1_data_daily_report unique (id_restaurant, dre_date)
+  data.data_document (
+    doc_id serial primary key,
+    doc_name varchar(200) not null,
+    doc_file_url varchar(300) not null,
+    doc_file_size int,
+    doc_mime_type varchar(100),
+    doc_notes text,
+    doc_created_date timestamp default current_timestamp,
+    doc_record_status varchar(1) not null default '0',
+    id_document_type int not null,
+    id_property int,
+    id_contract int,
+    id_client int,
+    constraint fk1_data_document foreign key (id_document_type) references data.data_document_type (dty_id),
+    constraint fk2_data_document foreign key (id_property) references data.data_property (pro_id),
+    constraint fk3_data_document foreign key (id_contract) references data.data_contract (con_id),
+    constraint fk4_data_document foreign key (id_client) references data.data_client (cli_id)
   );
 
-create index idx_daily_report_restaurant on data.data_daily_report (id_restaurant);
+create index idx_document_type on data.data_document (id_document_type);
 
-create index idx_daily_report_date on data.data_daily_report (dre_date);
+create index idx_document_property on data.data_document (id_property);
+
+create index idx_document_contract on data.data_document (id_contract);
+
+create index idx_document_client on data.data_document (id_client);
