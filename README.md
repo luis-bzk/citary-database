@@ -1,6 +1,6 @@
 ## Database - README
 
-<h1 align="center"><b>Citary</b></h1>
+<h1 align="center"><b>Nubrik</b></h1>
 <h2 align="center"><b>PostgreSQL Database</b></h2>
 
 <p align="center">PostgreSQL database container for storing appointments and user data</p>
@@ -18,7 +18,7 @@
 
 ## Overview
 
-This is the database service for the **Citary** project. It uses a custom PostgreSQL Docker image and provides persistent storage via Kubernetes volumes.
+This is the database service for the **Nubrik** project. It uses a custom PostgreSQL Docker image and provides persistent storage via Kubernetes volumes.
 
 ## Technologies Used
 
